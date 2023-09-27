@@ -1,0 +1,1 @@
+export const genUrl = (fn: string) => `/exec?fn=${fn}`
