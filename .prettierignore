@@ -1,0 +1,16 @@
+node_modules/
+dist/
+.prettierrc
+.eslintrc.json
+*env.d.ts
+package.json
+*.md
+*.lock
+*config.ts
+*.config.cjs
+src/assets
+.env.example
+*.env
+.env
+coverage
+stats.html
