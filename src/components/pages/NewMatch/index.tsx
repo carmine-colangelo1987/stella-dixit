@@ -1,15 +1,15 @@
 /** @format */
 import { useState } from 'react';
 import { useLazyCreateNewMatchQuery } from '../../../store/api/match';
-import { tailwindColorList, tailwindColorTones } from '../../../utils/tailwindColors';
+import PageTitle from '../../common/PageTitle';
 
-console.log(tailwindColorList, tailwindColorTones);
 const NewMatch = () => {
   const matchDay = new Intl.DateTimeFormat('it-IT', {
     year: 'numeric',
     month: '2-digit',
     day: '2-digit',
   }).format(new Date());
+
   const [title, setTitle] = useState(`Partita del ${matchDay}`);
   const [players, setPlayers] = useState<number>(2);
   const [rounds, setRounds] = useState<number>(4);
@@ -26,7 +26,7 @@ const NewMatch = () => {
 
   return (
     <div className="space-y-4">
-      <h1>Nuova Partita</h1>
+      <PageTitle>Nuova Partita</PageTitle>
       <section>
         <label className="block mb-2" htmlFor="title">
           Inserisci il titolo della nuova partita

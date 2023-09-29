@@ -3,6 +3,6 @@
 export enum AppRoutes {
   BASE = '/',
   NEW_MATCH = '/nuova-partita',
-  PAIR_PLAYER = '/scegli-giocatore',
+  CREATE_PLAYER = '/crea-giocatore',
   CURRENT_MATCH = '/partita',
 }
