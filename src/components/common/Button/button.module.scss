@@ -1,0 +1,27 @@
+/** @format */
+
+.btn {
+  @apply rounded-full font-medium text-base px-5 py-2.5 text-center cursor-pointer transition-base;
+
+  &:focus {
+    @apply outline-none;
+  }
+
+  &:global(.primary) {
+    @apply text-white bg-primary;
+    &:hover {
+      @apply bg-primary-darken;
+    }
+  }
+
+  &:global(.secondary) {
+    @apply text-white bg-purple-700;
+    &:hover {
+      @apply bg-purple-800;
+    }
+  }
+
+  &:global(.lg) {
+    @apply text-lg;
+  }
+}

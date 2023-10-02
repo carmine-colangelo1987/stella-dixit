@@ -1,0 +1,12 @@
+/** @format */
+
+.formInput {
+  @apply space-y-2;
+  input {
+    @apply bg-white border border-gray-300 text-gray-900 text-sm rounded-full block w-full p-2.5;
+
+    &:focus {
+      @apply border-gray-500 outline-none;
+    }
+  }
+}

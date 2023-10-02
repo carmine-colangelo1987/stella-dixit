@@ -5,7 +5,8 @@ import { Player } from '../../../types';
 import PageTitle from '../../common/PageTitle';
 import { tailwindColorList } from '../../../utils/tailwindColors';
 import InsertNewPlayer from './partials/InsertNewPlayer';
-import PlayerCard from '../../common/PlayerCard';
+import Container from '../../common/Container';
+import PlayersList from './partials/PlayersList';
 
 type Props = {};
 
@@ -25,21 +26,26 @@ const CreatePlayers = (props: Props) => {
     setPlayers(prevP => prevP.concat(p));
   };
 
-  return (
-    <div>
-      <PageTitle>Nuovo giocatore</PageTitle>
-      <InsertNewPlayer availableColors={availableColors} addPlayer={addPlayer} />
+  const removePlayer = (i: number) => {
+    setPlayers(prevP => prevP.filter((p, j) => j !== i));
+  };
 
-      <div className={'mt-4 flex flex-wrap px-2 max-w-3xl mx-auto'}>
-        {players.map(player => {
-          return (
-            <div key={player.name} className="w-full md:w-1/2 lg:w-1/3 p-2">
-              <PlayerCard name={player.name} color={player.color} />
-            </div>
-          );
-        })}
-      </div>
-    </div>
+  return (
+    <>
+      <Container>
+        <PageTitle
+          subtitle={'Creazione degli avatar'}
+          description={'In questa pagina puoi creare gli avatar dei giocatori di questa partita.'}
+        >
+          Cercatori di Stelle
+        </PageTitle>
+      </Container>
+
+      <InsertNewPlayer availableColors={availableColors} addPlayer={addPlayer} />
+      <Container>
+        <PlayersList players={players} onRemovePlayer={removePlayer} />
+      </Container>
+    </>
   );
 };
 

@@ -1,0 +1,11 @@
+/** @format */
+
+.container {
+  --gutter-x: 1rem;
+  @apply w-full max-w-2xl mx-auto;
+  padding-left: var(--gutter-x);
+  padding-right: var(--gutter-x);
+  @screen lg {
+    @apply max-w-3xl;
+  }
+}

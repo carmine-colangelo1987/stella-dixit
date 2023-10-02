@@ -1,6 +1,11 @@
 /** @format */
 
 export const tailwindColorList = [
+  'slate',
+  'gray',
+  'zinc',
+  'neutral',
+  'stone',
   'red',
   'orange',
   'amber',
@@ -10,6 +15,7 @@ export const tailwindColorList = [
   'emerald',
   'teal',
   'cyan',
+  'sky',
   'blue',
   'indigo',
   'violet',
@@ -17,7 +23,6 @@ export const tailwindColorList = [
   'fuchsia',
   'pink',
   'rose',
-  'gray',
 ];
 
 export const tailwindColorTones = [50, ...Array.from({ length: 9 }, (_, i) => 100 * (i + 1))];
