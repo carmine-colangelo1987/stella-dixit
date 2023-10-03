@@ -2,33 +2,37 @@
 
 import PlayersList from '../CreatePlayers/partials/PlayersList';
 import Container from '../../common/Container';
-import { useMemo } from 'react';
-import { Player } from '../../../types';
 import PageTitle from '../../common/PageTitle';
+import { useAppDispatch, useAppSelector } from '../../../hooks/useStore';
+import { setPlayer } from '../../../store/slices/matchData';
+import { useLazyGetPlayersListQuery, useLazyPairUserQuery } from '../../../store/api/match';
+import { useEffect } from 'react';
 
-type Props = {};
+const SelectPlayer = () => {
+  const dispatch = useAppDispatch();
+  const clientId = useAppSelector(s => s.matchDataReducer.clientId);
+  const [getPlayersListData, { data }] = useLazyGetPlayersListQuery();
+  const [pairUser] = useLazyPairUserQuery();
+  const players = data?.data || [];
 
-const SelectPlayer = (props: Props) => {
-  const players = useMemo<Player[]>(
-    () => [
-      {
-        id: 'aaa',
-        name: 'mino',
-        color: 'teal',
-        points: 0,
-      },
-      {
-        id: 'bbb',
-        name: 'elisa',
-        color: 'neutral',
-        points: 0,
-      },
-    ],
-    [],
-  );
+  useEffect(() => {
+    getPlayersListData();
+  }, []);
 
   const onPlayerSelected = (i: number) => {
-    console.log('hai selezionato ', players[i]);
+    const player = players[i];
+    if (!player.paired) {
+      const confirmed = window.confirm(`Confermi di voler iniziare la partita con l'utente ${player.name}?`);
+      if (confirmed) {
+        pairUser({ clientId, userId: player.id }).then(response => {
+          console.log('pairUser', { response });
+          getPlayersListData();
+          dispatch(setPlayer(players[i]));
+        });
+      } else {
+        console.log('Utente non confermato', player, clientId);
+      }
+    }
   };
 
   return (

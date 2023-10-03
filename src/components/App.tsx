@@ -7,6 +7,7 @@ import Home from './pages/Home';
 import NewMatch from './pages/NewMatch';
 import CreatePlayers from './pages/CreatePlayers';
 import SelectPlayer from './pages/SelectPlayer';
+import MatchDashboard from './pages/MatchDashboard';
 
 function App() {
   return (
@@ -16,9 +17,11 @@ function App() {
         <Routes>
           <Route path={AppRoutes.BASE} element={<Home />} />
           <Route path={AppRoutes.NEW_MATCH} element={<NewMatch />} />
-          <Route path={AppRoutes.CREATE_PLAYERS} element={<CreatePlayers />} />
-          <Route path={AppRoutes.SELECT_PLAYER} element={<SelectPlayer />} />
-          <Route path={AppRoutes.CURRENT_MATCH} element={<>TODO Partita</>} />
+          <Route path={AppRoutes.CURRENT_MATCH} element={<MatchDashboard />}>
+            <Route index element={<>prova uno</>} />
+            <Route path={AppRoutes.CREATE_PLAYERS} element={<CreatePlayers />} />
+            <Route path={AppRoutes.SELECT_PLAYER} element={<SelectPlayer />} />
+          </Route>
         </Routes>
       </main>
     </>

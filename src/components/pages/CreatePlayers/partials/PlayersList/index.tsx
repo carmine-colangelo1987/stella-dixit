@@ -3,6 +3,7 @@
 import PlayerCard from '../../../../common/PlayerCard';
 import { CreationPlayer } from '../../index';
 import classes from './playersList.module.scss';
+import classNames from 'classnames';
 
 type Props = {
   players: Array<CreationPlayer>;
@@ -19,32 +20,22 @@ const PlayersList = ({ players, onRemovePlayer, onPlayerSelected }: Props) => {
     onRemovePlayer && onRemovePlayer(i);
   };
 
-  const text =
-    players.length === 0
-      ? 'Nessun giocatore creato...'
-      : players.length === 1
-      ? `Hai creato un giocatore`
-      : `Hai creato ${players.length} giocatori!`;
-
   return (
-    <div className="py-4 space-y-4">
-      <p className="text-center text-main-text-lighten">{text}</p>
-      {players.length > 0 && (
-        <ul className={classes.list}>
-          {players.map((player, i) => {
-            return (
-              <li key={player.name}>
-                <PlayerCard
-                  name={player.name}
-                  color={player.color}
-                  onRemove={onRemovePlayer && onRemove(i)}
-                  onClick={onPlayerSelected && onClick(i)}
-                />
-              </li>
-            );
-          })}
-        </ul>
-      )}
+    <div className="py-4">
+      <ul className={classes.list}>
+        {players.map((player, i) => {
+          return (
+            <li key={player.name} className={classNames({ 'opacity-50': player.paired })}>
+              <PlayerCard
+                name={player.name}
+                color={player.color}
+                onRemove={onRemovePlayer && onRemove(i)}
+                onClick={onPlayerSelected && onClick(i)}
+              />
+            </li>
+          );
+        })}
+      </ul>
     </div>
   );
 };
