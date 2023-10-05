@@ -4,13 +4,13 @@ import PlayersList from '../CreatePlayers/partials/PlayersList';
 import Container from '../../common/Container';
 import PageTitle from '../../common/PageTitle';
 import { useAppDispatch, useAppSelector } from '../../../hooks/useStore';
-import { setPlayer } from '../../../store/slices/matchData';
+import { setPlayer } from '../../../store/slices/playerData';
 import { useLazyGetPlayersListQuery, useLazyPairUserQuery } from '../../../store/api/match';
 import { useEffect } from 'react';
 
 const SelectPlayer = () => {
   const dispatch = useAppDispatch();
-  const clientId = useAppSelector(s => s.matchDataReducer.clientId);
+  const clientId = useAppSelector(s => s.clientId);
   const [getPlayersListData, { data }] = useLazyGetPlayersListQuery();
   const [pairUser] = useLazyPairUserQuery();
   const players = data?.data || [];

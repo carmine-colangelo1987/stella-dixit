@@ -6,6 +6,9 @@ export enum AppRoutes {
   CURRENT_MATCH = '/partita/:matchId',
   CREATE_PLAYERS = 'crea-cercatori',
   SELECT_PLAYER = 'seleziona-cercatore',
+  CURRENT_ROUND = 'round',
+  ROUND_SELECTION_PHASE = 'seleziona-carte',
+  ROUND_MATCHING_PHASE = 'scintille',
 }
 
 export const setMatchRoute = (id: string) => AppRoutes.CURRENT_MATCH.replace(':matchId', id);

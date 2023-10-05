@@ -1,17 +1,12 @@
 /** @format */
 
-import { uuid } from '../../../utils/uuid';
-import { Player } from '../../../types';
+import { MatchData } from '../../../types';
 
 /** @format */
 
 export type TMatchData = {
   matchId?: string;
-  userId?: string;
-  clientId: string;
-  player?: Player;
+  matchData?: MatchData;
 };
 
-export const initialState: TMatchData = {
-  clientId: uuid(),
-};
+export const initialState: TMatchData = {};
