@@ -1,4 +1,5 @@
+/** @format */
 
 export const initialState = {
-	asideOpen: false,
+  starMapLastRotation: 0,
 };

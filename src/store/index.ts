@@ -15,6 +15,7 @@ import {
 import uiDataReducer from './slices/uiData';
 import matchDataReducer from './slices/matchData';
 import playerDataReducer from './slices/playerData';
+import roundDataReducer from './slices/roundData';
 import { apiMatch } from './api/match';
 import { uuid } from '../utils/uuid';
 
@@ -28,6 +29,7 @@ export const rootReducers = combineReducers({
   uiDataReducer,
   matchDataReducer,
   playerDataReducer,
+  roundDataReducer,
   clientId: createReducer(uuid(), s => s),
 });
 

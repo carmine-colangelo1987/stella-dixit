@@ -2,27 +2,18 @@
 
 import { plancia } from '../../../constants/plancia';
 import classes from './starMap.module.scss';
-import { useState } from 'react';
 import classNames from 'classnames';
 import RotationToolbar from '../RotationToolbar';
 import MiniMap from './partials/MiniMap';
 import StarCard from './partials/StarCard';
 import { useAppSelector } from '../../../hooks/useStore';
+import { useRoundSelectedCard } from '../../../hooks/useRoundSelectedCard';
 
 const StarMap = () => {
   const playerColor = useAppSelector(s => s.playerDataReducer?.player?.color ?? 'orange');
-  const [selected, setSelected] = useState<string[]>([]);
+  const [selected, onToggleSelection] = useRoundSelectedCard();
 
   const isSelectedCard = (id: string) => selected.includes(id);
-
-  const onToggleSelection = (id: string) => {
-    setSelected(prev => {
-      if (prev.find(sId => id === sId)) {
-        return prev.filter(sId => id !== sId);
-      }
-      return prev.concat(id);
-    });
-  };
 
   const disableUnselectedCards = selected.length >= 10;
 

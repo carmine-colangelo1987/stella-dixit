@@ -16,15 +16,12 @@
 }
 
 .moonPosition {
-  @apply bg-purple-700 overflow-hidden absolute z-10 left-0 top-1/2 rounded-l rounded-r-sm;
+  @apply overflow-hidden absolute z-10 left-0 top-1/2 rounded-l rounded-r-sm;
   height: 106%;
-  width: 12%;
+  width: 11%;
   transform: translateY(-50%);
-  .moon {
-    @apply block absolute top-1/2 right-2 bg-gray-100 rounded-full translate-y-[-50%];
-    height: 75%;
-    aspect-ratio: 1;
-  }
+  background: theme('colors.purple.600') url('../../../../../assets/moon-position.png') left center no-repeat;
+  background-size: cover;
 }
 .grid {
   @apply w-full relative z-20;

@@ -3,19 +3,16 @@
 import classes from './rotationToolbar.module.scss';
 import Icon from '../Icon';
 import classNames from 'classnames';
-import { PropsWithChildren, useState } from 'react';
-
-const LS_LAST_ROTATION = 'app:last_rotation';
+import { PropsWithChildren } from 'react';
+import { useAppDispatch, useAppSelector } from '../../../hooks/useStore';
+import { addStarMapRotation } from '../../../store/slices/uiData';
 
 const RotationToolbar = ({ children }: PropsWithChildren) => {
-  const [rotation, setRotation] = useState(Number(localStorage.getItem(LS_LAST_ROTATION) ?? '0'));
+  const dispatch = useAppDispatch();
+  const rotation = useAppSelector(s => s.uiDataReducer.starMapLastRotation);
 
   const rotate = (add: number) => () => {
-    setRotation(p => {
-      const result = p + add;
-      localStorage.setItem(LS_LAST_ROTATION, result.toString());
-      return result;
-    });
+    dispatch(addStarMapRotation(add));
   };
 
   return (

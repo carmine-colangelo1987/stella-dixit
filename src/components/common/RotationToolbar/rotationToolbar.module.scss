@@ -3,7 +3,7 @@
 .toolbar {
   @apply p-4 rounded-full border border-gray-200 flex justify-between items-center gap-2;
   .btn {
-    @apply w-12 flex items-center justify-center rounded-full bg-purple-300 shadow-lg active:shadow-sm aspect-square text-white;
+    @apply w-12 flex items-center justify-center rounded-full bg-purple-300 shadow active:shadow-sm aspect-square text-white;
   }
 }
 .rotatingWrapper {
