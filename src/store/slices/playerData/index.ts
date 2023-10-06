@@ -3,7 +3,7 @@
 // eslint-disable-next-line import/named
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { initialState } from './initialState';
-import { Player } from '../../../types';
+import { CreationPlayer, Player } from '../../../types';
 
 /**
  * Reducer that exclusively handles UI shared data.
@@ -20,10 +20,16 @@ export const playerData = createSlice({
         delete state.userId;
       }
     },
+    addNewUser: (state, action: PayloadAction<CreationPlayer>) => {
+      state.createdPlayersList = state.createdPlayersList.concat(action.payload);
+    },
+    deleteNewUser: (state, action: PayloadAction<number>) => {
+      state.createdPlayersList = state.createdPlayersList.filter((_, i) => i !== action.payload);
+    },
     resetPlayerData: () => initialState,
   },
 });
 
-export const { setPlayer, resetPlayerData } = playerData.actions;
+export const { setPlayer, addNewUser, deleteNewUser, resetPlayerData } = playerData.actions;
 
 export default playerData.reducer;

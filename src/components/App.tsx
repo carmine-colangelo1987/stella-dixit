@@ -11,6 +11,7 @@ import MatchDashboard from './pages/MatchDashboard';
 import CurrentRound from './pages/CurrentRound';
 import Dashboard from './pages/MatchDashboard/Dashboard';
 import RoundSelection from './pages/RoundSelection';
+import CurrentRoundIndex from './pages/CurrentRound/CurrentRound';
 
 function App() {
   return (
@@ -25,7 +26,7 @@ function App() {
             <Route path={AppRoutes.CREATE_PLAYERS} element={<CreatePlayers />} />
             <Route path={AppRoutes.SELECT_PLAYER} element={<SelectPlayer />} />
             <Route path={AppRoutes.CURRENT_ROUND} element={<CurrentRound />}>
-              <Route index element={<>Round</>} />
+              <Route index element={<CurrentRoundIndex />} />
               <Route path={AppRoutes.ROUND_SELECTION_PHASE} element={<RoundSelection />} />
               <Route path={AppRoutes.ROUND_MATCHING_PHASE} element={<>Fase Matching</>} />
             </Route>

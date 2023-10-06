@@ -1,20 +1,23 @@
 /** @format */
 
-import { useMemo, useState } from 'react';
-import { Player } from '../../../types';
+import { useMemo } from 'react';
+import { CreationPlayer } from '../../../types';
 import PageTitle from '../../common/PageTitle';
 import { tailwindColorList } from '../../../utils/tailwindColors';
 import InsertNewPlayer from './partials/InsertNewPlayer';
 import Container from '../../common/Container';
 import PlayersList from './partials/PlayersList';
 import Button from '../../common/Button';
+import { useNavigate } from 'react-router-dom';
+import { AppRoutes } from '../../../router/routes';
+import { useAppDispatch, useAppSelector } from '../../../hooks/useStore';
+import { addNewUser, deleteNewUser } from '../../../store/slices/playerData';
 
-type Props = {};
-
-export type CreationPlayer = Pick<Player, 'name' | 'color' | 'paired'>;
-
-const CreatePlayers = (props: Props) => {
-  const [players, setPlayers] = useState<Array<CreationPlayer>>([]);
+const CreatePlayers = () => {
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+  const players = useAppSelector(s => s.playerDataReducer.createdPlayersList);
+  const expectedPlayers = useAppSelector(s => s.matchDataReducer.matchData?.expected_users);
 
   const availableColors = useMemo(() => {
     if (players.length > 0) {
@@ -24,21 +27,19 @@ const CreatePlayers = (props: Props) => {
   }, [players]);
 
   const addPlayer = (p: CreationPlayer) => {
-    setPlayers(prevP => prevP.concat(p));
+    dispatch(addNewUser(p));
   };
 
   const removePlayer = (i: number) => {
-    setPlayers(prevP => prevP.filter((p, j) => j !== i));
+    dispatch(deleteNewUser(i));
   };
 
-  const onProceed = () => {};
+  const onProceed = () => {
+    // todo fare la mutation per inserire i players
+    navigate(AppRoutes.CURRENT_MATCH);
+  };
 
-  const text =
-    players.length === 0
-      ? 'Nessun giocatore creato...'
-      : players.length === 1
-      ? `Hai creato un giocatore`
-      : `Hai creato ${players.length} giocatori!`;
+  const ready = players.length === expectedPlayers;
 
   return (
     <>
@@ -51,10 +52,16 @@ const CreatePlayers = (props: Props) => {
         </PageTitle>
       </Container>
 
-      <InsertNewPlayer availableColors={availableColors} addPlayer={addPlayer} />
       <Container className="py-4">
-        <p className="text-center text-main-text-lighten">{text}</p>
+        <p className="text-center text-main-text-lighten">
+          Giocatori creati {players.length}/{expectedPlayers}
+        </p>
         {players.length > 0 && <PlayersList players={players} onRemovePlayer={removePlayer} />}
+      </Container>
+
+      {!ready && <InsertNewPlayer availableColors={availableColors} addPlayer={addPlayer} />}
+
+      <Container className="py-4">
         {players.length > 1 && (
           <Button variant="secondary" onClick={onProceed} className="w-full mb-4">
             Inizia la caccia con {players.length} cercatori!

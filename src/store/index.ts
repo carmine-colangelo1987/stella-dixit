@@ -22,6 +22,7 @@ import { uuid } from '../utils/uuid';
 const persistConfig = {
   key: 'root',
   storage: storage,
+  blacklist: [apiMatch.reducerPath],
 };
 
 export const rootReducers = combineReducers({

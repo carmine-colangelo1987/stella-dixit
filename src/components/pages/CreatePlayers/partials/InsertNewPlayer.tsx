@@ -1,13 +1,13 @@
 /** @format */
 
 import { memo, useState } from 'react';
-import { CreationPlayer } from '../index';
 import Button from '../../../common/Button';
 import FormInput from '../../../common/FormInput';
 import PlayerCard from '../../../common/PlayerCard';
 import FormLabel from '../../../common/FormLabel';
 import Card from '../../../common/Card';
 import Container from '../../../common/Container';
+import { CreationPlayer } from '../../../../types';
 
 type Props = {
   availableColors: string[];

@@ -7,10 +7,15 @@ import { useAppDispatch, useAppSelector } from '../../../hooks/useStore';
 import { setPlayer } from '../../../store/slices/playerData';
 import { useLazyGetPlayersListQuery, useLazyPairUserQuery } from '../../../store/api/match';
 import { useEffect } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { setRoundRoute } from '../../../router/routes';
 
 const SelectPlayer = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
   const dispatch = useAppDispatch();
   const clientId = useAppSelector(s => s.clientId);
+  const matchId = useAppSelector(s => s.matchDataReducer.matchId ?? '');
   const [getPlayersListData, { data }] = useLazyGetPlayersListQuery();
   const [pairUser] = useLazyPairUserQuery();
   const players = data?.data || [];
@@ -25,7 +30,9 @@ const SelectPlayer = () => {
       const confirmed = window.confirm(`Confermi di voler iniziare la partita con l'utente ${player.name}?`);
       if (confirmed) {
         pairUser({ clientId, userId: player.id }).then(response => {
-          console.log('pairUser', { response });
+          console.log(location, setRoundRoute(matchId));
+          debugger;
+          navigate(setRoundRoute(matchId));
           getPlayersListData();
           dispatch(setPlayer(players[i]));
         });

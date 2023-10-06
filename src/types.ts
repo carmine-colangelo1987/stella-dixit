@@ -12,6 +12,8 @@ export type Player = {
   points: number;
 };
 
+export type CreationPlayer = Pick<Player, 'name' | 'color' | 'paired'>;
+
 export type MatchData = {
   matchTitle: string;
   currentMatch: string;

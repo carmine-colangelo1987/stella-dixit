@@ -7,6 +7,10 @@ import FormInput from '../../common/FormInput';
 import Button from '../../common/Button';
 import { useNavigate } from 'react-router-dom';
 import { setMatchRoute } from '../../../router/routes';
+import RadioSelect from '../../common/RadioSelect';
+
+const userOptions = Array.from({ length: 17 }, (_, i) => ({ id: 'users' + i, value: 2 + i }));
+const roundOptions = Array.from({ length: 5 }, (_, i) => ({ id: 'rounds_' + i, value: 4 + i * 2 }));
 
 const NewMatch = () => {
   const matchDay = new Intl.DateTimeFormat('it-IT', {
@@ -47,27 +51,20 @@ const NewMatch = () => {
       </section>
 
       <section>
-        <FormInput
-          label={'Inserisci il numero di partecipanti'}
-          id="expected_users"
-          type="number"
-          min={2}
-          max={20}
-          value={players}
-          onChange={e => setPlayers(+e.target.value)}
+        <div className="mb-2">Numero di cacciatori di stelle</div>
+        <RadioSelect
+          name={'expected_users'}
+          options={userOptions}
+          onChange={o => setPlayers(o.value as number)}
         />
       </section>
 
       <section>
-        <FormInput
-          label={'Inserisci il numero di round'}
-          id="total_rounds"
-          type="number"
-          min={4}
-          step={2}
-          max={16}
-          value={rounds}
-          onChange={e => setRounds(+e.target.value)}
+        <div className="mb-2">Numero di turni</div>
+        <RadioSelect
+          name={'total_rounds'}
+          options={roundOptions}
+          onChange={o => setRounds(o.value as number)}
         />
       </section>
 

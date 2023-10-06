@@ -12,3 +12,7 @@ export enum AppRoutes {
 }
 
 export const setMatchRoute = (id: string) => AppRoutes.CURRENT_MATCH.replace(':matchId', id);
+export const setRoundRoute = (matchId: string, phase?: string) =>
+  `${AppRoutes.CURRENT_MATCH.replace(':matchId', matchId)}/${AppRoutes.CURRENT_ROUND}${
+    phase ? '/' + phase : ''
+  }`;
