@@ -1,0 +1,15 @@
+/** @format */
+
+.grid {
+  font-size: clamp(16px, 2vw, 32px);
+  display: grid;
+  width: 100%;
+  aspect-ratio: 1.2;
+  gap: 0.5em;
+  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+
+  @screen lg {
+    @apply text-lg;
+  }
+}

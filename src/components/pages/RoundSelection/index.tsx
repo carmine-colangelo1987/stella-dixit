@@ -1,7 +1,7 @@
 /** @format */
 
 import Container from '../../common/Container';
-import CardTable from '../../common/CardTable';
+import StarMap from '../../common/StarMap';
 
 type Props = {};
 
@@ -9,7 +9,7 @@ const RoundSelection = (props: Props) => {
   return (
     <div className="overflow-hidden">
       <Container>
-        <CardTable />
+        <StarMap />
       </Container>
     </div>
   );

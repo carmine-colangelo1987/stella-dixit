@@ -1,0 +1,31 @@
+/** @format */
+
+.map {
+  @apply w-full flex items-center relative mx-auto;
+  font-size: clamp(16px, 2vw, 32px);
+  aspect-ratio: 1;
+  min-width: 300px;
+  max-width: 500px;
+}
+.figure {
+  @apply drop-shadow-md;
+}
+
+.container {
+  @apply relative z-20 w-full px-[7%];
+}
+
+.moonPosition {
+  @apply bg-purple-700 overflow-hidden absolute z-10 left-0 top-1/2 rounded-l rounded-r-sm;
+  height: 106%;
+  width: 12%;
+  transform: translateY(-50%);
+  .moon {
+    @apply block absolute top-1/2 right-2 bg-gray-100 rounded-full translate-y-[-50%];
+    height: 75%;
+    aspect-ratio: 1;
+  }
+}
+.grid {
+  @apply w-full relative z-20;
+}

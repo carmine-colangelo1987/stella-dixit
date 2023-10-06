@@ -1,0 +1,18 @@
+/** @format */
+
+.card {
+  @apply rounded bg-gray-50 shadow relative overflow-hidden;
+  transition: all 0.3s;
+  &:global(.selected) {
+    @apply shadow-md;
+    transform: rotate(-2deg);
+  }
+  &:global(.disabled) {
+    @apply shadow-none;
+    transform: scale(0.95);
+    &:after {
+      content: '';
+      @apply absolute inset-0 bg-black bg-opacity-20 block;
+    }
+  }
+}
