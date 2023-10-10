@@ -5,9 +5,6 @@
   width: clamp(300px, 100%, 400px);
   background: url('../../../../../assets/selection-board.png') center bottom no-repeat;
   background-size: cover;
-  @screen lg {
-    @apply p-8 pb-12;
-  }
 }
 .moon {
   @apply rounded-full aspect-square bg-white;

@@ -3,17 +3,18 @@ import Container from '../../common/Container';
 import SelectionBoard from './partials/SelectionBoard';
 import Button from '../../common/Button';
 import { useState } from 'react';
+import FormInput from '../../common/FormInput';
 
-type Props = {};
-
-const SelectionResult = (props: Props) => {
+const SelectionResult = () => {
   const [stopAt, setStopAt] = useState<number>();
+  const [steps, setSteps] = useState<number>(0);
 
   return (
     <Container>
       <SelectionBoard stopAt={stopAt} />
       <hr />
-      <Button onClick={() => setStopAt(8)}>Procedi</Button>
+      <Button onClick={() => setStopAt(steps)}>Procedi</Button>
+      <FormInput value={steps} onChange={e => setSteps(+e.target.value)} />
     </Container>
   );
 };
