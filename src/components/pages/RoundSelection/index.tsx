@@ -3,9 +3,7 @@
 import Container from '../../common/Container';
 import StarMap from '../../common/StarMap';
 
-type Props = {};
-
-const RoundSelection = (props: Props) => {
+const RoundSelection = () => {
   return (
     <div className="overflow-hidden">
       <Container>

@@ -1,0 +1,17 @@
+/** @format */
+
+.board {
+  @apply relative flex flex-col-reverse gap-y-4 mx-auto rounded-lg p-4 pb-8 shadow-md overflow-hidden;
+  width: clamp(300px, 100%, 400px);
+  background: url('../../../../../assets/selection-board.png') center bottom no-repeat;
+  background-size: cover;
+  @screen lg {
+    @apply p-8 pb-12;
+  }
+}
+.moon {
+  @apply rounded-full aspect-square bg-white;
+  @apply absolute top-1/2 left-0 w-full;
+  box-shadow: 0 0 30px rgba(white, 0.8);
+  transform: translate(-65%, -50%);
+}

@@ -1,0 +1,29 @@
+/** @format */
+
+.wrapper {
+  --coin-size: 95%;
+  --shadow-size: var(--coin-size);
+  perspective: 300px;
+  @apply transition-base mx-auto;
+  max-width: 120px;
+  &:global(.perspective) {
+    --coin-size: 93%;
+    --shadow-size: 90%;
+    :local(.coinContainer) {
+      transform: rotateX(45deg);
+    }
+  }
+}
+.coinContainer {
+  @apply w-full aspect-square flex justify-center items-start relative transition-base;
+}
+.coin {
+  width: var(--coin-size);
+  @apply rounded-full aspect-square relative z-20 p-[12%] transition-base;
+}
+.coinShadow {
+  width: var(--shadow-size);
+  @apply rounded-full aspect-square transition-base;
+  @apply block absolute bottom-0 left-1/2 z-10;
+  transform: translateX(-50%);
+}

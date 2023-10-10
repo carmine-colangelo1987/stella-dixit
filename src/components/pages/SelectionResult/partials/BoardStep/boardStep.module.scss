@@ -1,0 +1,80 @@
+/** @format */
+
+$steps: (
+  1: (
+    margin: 60%,
+    top: 0%,
+    left: 0%,
+    transform: translateX(-50%),
+  ),
+  2: (
+    margin: 40%,
+    top: 0%,
+    right: 0%,
+    transform: translateX(50%),
+  ),
+  3: (
+    margin: 20%,
+    top: 50%,
+    right: 0%,
+    transform: translate(50%, -50%),
+  ),
+  4: (
+    margin: 40%,
+    bottom: 0%,
+    right: 0%,
+    transform: translateX(50%),
+  ),
+  5: (
+    margin: 60%,
+    top: 0%,
+    left: 0%,
+    transform: translateX(-50%),
+  ),
+  6: (
+    margin: 60%,
+    top: 0%,
+    left: 0%,
+    transform: translateX(-50%),
+  ),
+  7: (
+    margin: 40%,
+    top: 50%,
+    left: 0%,
+    transform: translate(-50%, -50%),
+  ),
+  8: (
+    margin: 20%,
+    top: 0%,
+    left: 0%,
+    transform: translateX(-50%),
+  ),
+  9: (
+    margin: 20%,
+    top: 0%,
+    left: 0%,
+    transform: translateX(-50%),
+  ),
+  10: (
+    margin: 40%,
+    top: 0%,
+    left: 0%,
+    transform: translateX(-50%),
+  ),
+);
+
+.step {
+  @apply rounded-full w-20 aspect-square bg-white/20 flex items-center relative;
+  @each $i, $style in $steps {
+    &:global(.step_#{$i}) {
+      margin-left: map-get($style, margin);
+      > :global(.cloud) {
+        @each $property, $value in $style {
+          @if $property != margin {
+            #{$property}: #{$value};
+          }
+        }
+      }
+    }
+  }
+}

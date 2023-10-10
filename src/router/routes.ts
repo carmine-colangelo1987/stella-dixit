@@ -7,8 +7,10 @@ export enum AppRoutes {
   CREATE_PLAYERS = 'crea-cercatori',
   SELECT_PLAYER = 'seleziona-cercatore',
   CURRENT_ROUND = 'round',
-  ROUND_SELECTION_PHASE = 'seleziona-carte',
-  ROUND_MATCHING_PHASE = 'scintille',
+  ROUND_ASSOCIATION = 'associare',
+  ROUND_ANNOUNCE = 'annunciare',
+  ROUND_REVEAL = 'rivelare',
+  MATCH_RESULT = 'punteggio',
 }
 
 export const setMatchRoute = (id: string) => AppRoutes.CURRENT_MATCH.replace(':matchId', id);

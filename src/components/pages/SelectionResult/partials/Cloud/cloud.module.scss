@@ -1,0 +1,11 @@
+.cloud {
+  @apply relative w-full flex items-center justify-center text-sm;
+  width: 3em;
+  aspect-ratio: 250 / 200;
+  > svg {
+    @apply block w-full absolute inset-0 z-10 fill-white;
+  }
+  > span {
+    @apply font-black z-20;
+  }
+}
