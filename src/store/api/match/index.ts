@@ -8,6 +8,8 @@ import {
   GetMatchDataResponse,
   GetMatchDataVariables,
   GetPlayersListResponse,
+  GetRoundAssociationsResponse,
+  GetRoundAssociationsVariables,
   PairUserToClientResponse,
   PairUserToClientVariables,
 } from '../types';
@@ -53,6 +55,13 @@ export const apiMatch = createApi({
         },
       }),
     }),
+    getRoundAssociacions: builder.query<GetRoundAssociationsResponse, GetRoundAssociationsVariables>({
+      query: variables => ({
+        url: genUrl('getRoundAssociacions'),
+        method: 'POST',
+        body: JSON.stringify(variables),
+      }),
+    }),
   }),
 });
 
@@ -61,4 +70,6 @@ export const {
   useLazyGetMatchDataQuery,
   useLazyPairUserQuery,
   useLazyGetPlayersListQuery,
+  useGetPlayersListQuery,
+  useGetRoundAssociacionsQuery,
 } = apiMatch;

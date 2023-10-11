@@ -26,10 +26,13 @@ export const playerData = createSlice({
     deleteNewUser: (state, action: PayloadAction<number>) => {
       state.createdPlayersList = state.createdPlayersList.filter((_, i) => i !== action.payload);
     },
+    setPlayersList: (state, action: PayloadAction<Player[]>) => {
+      state.playersList = action.payload;
+    },
     resetPlayerData: () => initialState,
   },
 });
 
-export const { setPlayer, addNewUser, deleteNewUser, resetPlayerData } = playerData.actions;
+export const { setPlayer, addNewUser, deleteNewUser, setPlayersList, resetPlayerData } = playerData.actions;
 
 export default playerData.reducer;

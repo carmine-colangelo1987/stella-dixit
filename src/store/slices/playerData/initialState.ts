@@ -12,6 +12,7 @@ export type TPlayerData = {
 };
 
 export const initialState: TPlayerData = {
+  userId: 'e09a5abe-a9ea-45f8-84c2-f2f398c90e6f',
   createdPlayersList: [],
   playersList: [],
 };

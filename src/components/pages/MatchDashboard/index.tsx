@@ -1,21 +1,22 @@
 /** @format */
 
-import { Outlet, useParams } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 import { useLazyGetMatchDataQuery } from '../../../store/api/match';
 import { useEffect } from 'react';
 import { useAppDispatch } from '../../../hooks/useStore';
 import { setMatchData } from '../../../store/slices/matchData';
+import { useMatchId } from '../../../hooks/useMatchId';
 
 const MatchDashboard = () => {
-  const param = useParams<{ matchId: string }>();
+  const matchId = useMatchId();
   const dispatch = useAppDispatch();
   const [getMatchData, { isLoading }] = useLazyGetMatchDataQuery();
 
   useEffect(() => {
-    if (param.matchId) {
-      getMatchData({ matchId: param.matchId }).then(r => r.data?.data && dispatch(setMatchData(r.data.data)));
+    if (matchId) {
+      getMatchData({ matchId }).then(r => r.data?.data && dispatch(setMatchData(r.data.data)));
     }
-  }, [param.matchId]);
+  }, [matchId]);
 
   return (
     <>

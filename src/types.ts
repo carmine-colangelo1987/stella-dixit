@@ -1,6 +1,6 @@
 /** @format */
 
-export type RoundPhase = 'READY' | 'SELECTING' | 'SELECTED' | 'MATCHING' | 'COMPLETED';
+export type RoundPhase = 'ASSOCIATION' | 'ANNOUNCE' | 'REVEAL' | 'RESULTS';
 
 export type MatchPhase = 'CREATION' | RoundPhase;
 
@@ -23,4 +23,45 @@ export type MatchData = {
   currentRound: number;
   currentRoundName?: string;
   currentRoundPhase: MatchPhase;
+};
+
+export type CardID = `${0 | 1 | 2}-${0 | 1 | 2 | 3 | 4}`;
+
+export type RoundData = {
+  id: string;
+  name: string;
+  phase: RoundPhase;
+  selected_cards: CardID[];
+  total_selected_cards: number;
+  dark: boolean;
+  match: CardID[];
+  total_matches: number;
+  super_match: CardID[];
+  total_super_matches: number;
+  fallen: boolean;
+  temp_points: number;
+  points: number;
+};
+
+// risposta durante la fase di Association
+export type RoundAssociationData = {
+  userId: RoundData['id'];
+  total_selected_cards: RoundData['total_selected_cards'];
+  dark: RoundData['dark'];
+};
+
+// risposta durante la fase di Reveal
+export type RoundRevealData = {
+  userId: RoundData['id'];
+  match: RoundData['match'];
+  total_matches: RoundData['total_matches'];
+  super_match: RoundData['super_match'];
+  total_super_matches: RoundData['total_super_matches'];
+  fallen: RoundData['fallen'];
+};
+
+// risposta durante la fase di Reveal
+export type RoundResultData = {
+  userId: RoundData['id'];
+  points: RoundData['points'];
 };
