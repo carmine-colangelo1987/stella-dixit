@@ -5,12 +5,12 @@ import classes from './coin.module.scss';
 import classNames from 'classnames';
 
 type Props = {
-  color: string;
+  color?: string;
   dark?: boolean;
   perspective?: boolean;
 };
 
-const Coin = memo(({ color, dark, perspective }: Props) => {
+const Coin = memo(({ color = 'black', dark, perspective }: Props) => {
   return (
     <div className={classNames(classes.wrapper, { perspective })}>
       <div className={classNames(classes.coinContainer)}>

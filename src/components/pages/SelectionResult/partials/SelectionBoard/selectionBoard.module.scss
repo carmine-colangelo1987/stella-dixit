@@ -1,7 +1,7 @@
 /** @format */
 
 .board {
-  @apply relative flex flex-col-reverse rounded-lg shadow-xl overflow-hidden w-full h-full pb-[18px];
+  @apply relative flex flex-col-reverse rounded-lg overflow-hidden w-full h-full pb-[18px];
 }
 
 $steps: (
