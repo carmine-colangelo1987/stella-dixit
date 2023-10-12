@@ -7,6 +7,8 @@ import {
   faCoffee,
   faRotateForward,
   faRotateBackward,
+  faFlagCheckered,
+  faSpinner,
   faArrowRotateBackward,
   faArrowRotateForward,
 } from '@fortawesome/free-solid-svg-icons';
@@ -16,8 +18,10 @@ const lib = {
   coffee: faCoffee,
   'rotate-forward': faRotateForward,
   'rotate-backward': faRotateBackward,
+  spinner: faSpinner,
   'arrow-rotate-backward': faArrowRotateBackward,
   'arrow-rotate-forward': faArrowRotateForward,
+  'flag-checkered': faFlagCheckered,
 };
 
 export type AppIconName = keyof typeof lib;

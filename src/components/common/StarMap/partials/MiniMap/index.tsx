@@ -40,9 +40,7 @@ const MiniMap = memo(({ children, color }: PropsWithChildren<MiniMapProps>) => {
         </svg>
       </div>
       <div className={classes.container}>
-        <aside className={classes.moonPosition}>
-          <span className={classes.moon} />
-        </aside>
+        <aside className={classes.moonPosition} />
         <div className={classes.grid}>{children}</div>
       </div>
     </div>

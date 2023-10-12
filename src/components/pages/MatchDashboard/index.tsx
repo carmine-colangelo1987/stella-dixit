@@ -6,6 +6,7 @@ import { useEffect } from 'react';
 import { useAppDispatch } from '../../../hooks/useStore';
 import { setMatchData } from '../../../store/slices/matchData';
 import { useMatchId } from '../../../hooks/useMatchId';
+import Loader from '../../common/Loader';
 
 const MatchDashboard = () => {
   const matchId = useMatchId();
@@ -20,7 +21,7 @@ const MatchDashboard = () => {
 
   return (
     <>
-      {isLoading && <div>Attendi le informazioni...</div>}
+      {isLoading && <Loader />}
       <Outlet />
     </>
   );

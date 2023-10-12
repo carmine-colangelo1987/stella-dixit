@@ -1,48 +1,42 @@
 /** @format */
 
 .board {
-  @apply relative flex flex-col-reverse gap-y-4 mx-auto rounded-lg p-4 pb-8 shadow-md overflow-hidden;
-  width: clamp(300px, 100%, 400px);
-  background: url('../../../../../assets/selection-board.png') center bottom no-repeat;
-  background-size: cover;
-}
-.moon {
-  @apply rounded-full aspect-square bg-white;
-  @apply absolute top-1/2 left-0 w-full;
-  box-shadow: 0 0 30px rgba(white, 0.8);
-  transform: translate(-65%, -50%);
+  @apply relative flex flex-col-reverse rounded-lg shadow-xl overflow-hidden w-full h-full pb-[18px];
 }
 
 $steps: (
+  0: (
+    margin: 0 0 0 49%,
+  ),
   1: (
-    margin: 60%,
+    margin: 0 0 22px 50%,
   ),
   2: (
-    margin: 40%,
+    margin: 0 0 14px 29%,
   ),
   3: (
-    margin: 20%,
+    margin: 0 0 19px 13%,
   ),
   4: (
-    margin: 40%,
+    margin: 0 0 20px 32%,
   ),
   5: (
-    margin: 60%,
+    margin: 0 0 4px 58%,
   ),
   6: (
-    margin: 60%,
+    margin: 0 0 39px 60%,
   ),
   7: (
-    margin: 40%,
+    margin: 0 0 16px 38%,
   ),
   8: (
-    margin: 20%,
+    margin: 0 0 18px 17%,
   ),
   9: (
-    margin: 20%,
+    margin: 0 0 32px 14%,
   ),
   10: (
-    margin: 40%,
+    margin: 0 0 11px 38%,
   ),
 );
 
@@ -54,7 +48,7 @@ $steps: (
 .step {
   @each $i, $style in $steps {
     &:global(.step_#{$i}) {
-      margin-left: map-get($style, margin);
+      margin: map-get($style, margin);
     }
   }
 }

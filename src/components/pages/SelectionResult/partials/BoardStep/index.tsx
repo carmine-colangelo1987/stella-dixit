@@ -12,9 +12,11 @@ type Props = {
 const BoardStep = forwardRef<HTMLDivElement, Props>(({ id }, ref) => {
   return (
     <div ref={ref} className={classNames(classes.step, `step_${id}`)}>
-      <div className="cloud absolute">
-        <Cloud>{id}</Cloud>
-      </div>
+      {id > 0 && (
+        <div className="cloud absolute">
+          <Cloud>{id}</Cloud>
+        </div>
+      )}
     </div>
   );
 });

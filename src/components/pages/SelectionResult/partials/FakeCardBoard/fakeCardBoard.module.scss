@@ -1,0 +1,19 @@
+/** @format */
+
+$image: url('../../../../../assets/fake-board.png');
+$image-w: 1430px;
+$image-h: 1160px;
+$aside-w: 300px;
+
+.grid {
+  @apply rounded-md shadow-lg mx-auto;
+  width: 100%;
+  height: $image-h;
+  max-width: $image-w;
+  overflow: hidden;
+  display: grid;
+  grid-template-rows: 100%;
+  grid-template-columns: $aside-w auto;
+  background: $image left center no-repeat;
+  background-size: auto 100%;
+}

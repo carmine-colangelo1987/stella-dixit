@@ -66,4 +66,7 @@ $steps: (
       }
     }
   }
+  &:global(.step_0) {
+    background: transparent;
+  }
 }

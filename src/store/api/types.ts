@@ -19,6 +19,8 @@ export type GetMatchDataVariables = {
   matchId: string;
 };
 
+export type GetCurrentMatchResponse = BaseResponse<Omit<MatchData, 'currentRoundName' | 'expected_users'>>;
+
 export type GetMatchDataResponse = BaseResponse<MatchData>;
 
 export type GetPlayersListResponse = BaseResponse<Player[]>;

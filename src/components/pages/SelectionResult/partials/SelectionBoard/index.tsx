@@ -14,7 +14,7 @@ type Props = {
 };
 
 const STEPS = 10;
-const steps = Array.from({ length: STEPS }, (_, i) => i + 1);
+const steps = Array.from({ length: STEPS + 1 }, (_, i) => i);
 
 const SelectionBoard = memo(({ start }: Props) => {
   const matchId = useMatchId();
@@ -37,13 +37,14 @@ const SelectionBoard = memo(({ start }: Props) => {
   const playersCoins = useMemo(() => {
     return pawns.map(user => {
       if (user.userId === userId && userCoinStep == null) {
+        const startCoord = getCoordinates(0);
         return {
           ...user,
-          top: '100%',
-          left: '60%',
+          top: startCoord.y,
+          left: startCoord.x,
         };
       }
-      const step = user.total_selected_cards - 1;
+      const step = user.total_selected_cards;
       const coord = getCoordinates(user.userId === userId ? (userCoinStep as number) : step);
       return {
         ...user,
@@ -92,28 +93,25 @@ const SelectionBoard = memo(({ start }: Props) => {
   );
 
   return (
-    <>
-      <div className={classNames(classes.board, { ready: animationComplete })} ref={boardRef}>
-        {stepNodes}
-        <aside>
-          <div className={classes.moon} />
-          {playersCoins.map(
-            ({ userId: playerId, name, color, total_selected_cards, dark, ...style }, i, list) => {
-              const separate = i > 0 ? list[i - 1].total_selected_cards !== total_selected_cards : false;
-              const playerCoin = playerId === userId;
-              return (
-                <Fragment key={playerId}>
-                  {separate && <hr className="hidden" />}
-                  <div className={classNames(classes.coin, { playerCoin })} title={name} style={style}>
-                    <Coin color={color as string} dark={animationComplete && dark} />
-                  </div>
-                </Fragment>
-              );
-            },
-          )}
-        </aside>
-      </div>
-    </>
+    <div className={classNames(classes.board, { ready: animationComplete })} ref={boardRef}>
+      {stepNodes}
+      <aside>
+        {playersCoins.map(
+          ({ userId: playerId, name, color, total_selected_cards, dark, ...style }, i, list) => {
+            const separate = i > 0 ? list[i - 1].total_selected_cards !== total_selected_cards : false;
+            const playerCoin = playerId === userId;
+            return (
+              <Fragment key={playerId}>
+                {separate && <hr className="hidden" />}
+                <div className={classNames(classes.coin, { playerCoin })} title={name} style={style}>
+                  <Coin color={color as string} dark={animationComplete && dark} />
+                </div>
+              </Fragment>
+            );
+          },
+        )}
+      </aside>
+    </div>
   );
 });
 

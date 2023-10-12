@@ -5,6 +5,7 @@ import { genUrl } from '../../../constants/api';
 import {
   CreateMatchResponse,
   CreateMatchVariables,
+  GetCurrentMatchResponse,
   GetMatchDataResponse,
   GetMatchDataVariables,
   GetPlayersListResponse,
@@ -29,6 +30,12 @@ export const apiMatch = createApi({
         url: genUrl('newMatch'),
         method: 'POST',
         body: JSON.stringify(variables),
+      }),
+    }),
+    getCurrentMatch: builder.query<GetCurrentMatchResponse, void>({
+      query: () => ({
+        url: genUrl('getCurrentMatch'),
+        method: 'GET',
       }),
     }),
     getMatchData: builder.query<GetMatchDataResponse, GetMatchDataVariables>({
@@ -67,6 +74,7 @@ export const apiMatch = createApi({
 
 export const {
   useLazyCreateNewMatchQuery,
+  useGetCurrentMatchQuery,
   useLazyGetMatchDataQuery,
   useLazyPairUserQuery,
   useLazyGetPlayersListQuery,
