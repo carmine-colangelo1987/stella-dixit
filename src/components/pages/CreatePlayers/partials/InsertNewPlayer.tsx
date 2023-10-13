@@ -8,6 +8,7 @@ import FormLabel from '../../../common/FormLabel';
 import Card from '../../../common/Card';
 import Container from '../../../common/Container';
 import { CreationPlayer } from '../../../../types';
+import Coin from '../../../common/Coin';
 
 type Props = {
   availableColors: string[];
@@ -54,8 +55,10 @@ const InsertNewPlayer = memo(({ availableColors, addPlayer }: Props) => {
                       key={c}
                       title={c}
                       onClick={() => setColor(_c => (c === _c ? '' : c))}
-                      className={`w-12 h-12 rounded-full bg-${c}-500 ${color === c ? 'active' : ''}`}
-                    />
+                      className={`w-12 aspect-sqare rounded-full ${color === c ? 'active' : ''}`}
+                    >
+                      <Coin color={c} dark />
+                    </button>
                   ))}
                 </div>
               </section>

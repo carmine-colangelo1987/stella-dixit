@@ -14,6 +14,7 @@ import RoundSelection from './pages/RoundSelection';
 import CurrentRoundIndex from './pages/CurrentRound/CurrentRound';
 import MatchResult from './pages/MatchResult';
 import SelectionResult from './pages/SelectionResult';
+import Studio from './pages/Studio';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
       <main>
         <Routes>
           <Route path={AppRoutes.BASE} element={<Home />} />
+          <Route path={'/studio'} element={<Studio />} />
           <Route path={AppRoutes.NEW_MATCH} element={<NewMatch />} />
           <Route path={AppRoutes.CURRENT_MATCH} element={<MatchDashboard />}>
             <Route index element={<Dashboard />} />

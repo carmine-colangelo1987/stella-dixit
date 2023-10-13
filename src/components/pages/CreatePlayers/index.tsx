@@ -3,7 +3,7 @@
 import { useMemo } from 'react';
 import { CreationPlayer } from '../../../types';
 import PageTitle from '../../common/PageTitle';
-import { tailwindColorList } from '../../../utils/tailwindColors';
+import { coinColorsList } from '../../../utils/tailwindColors';
 import InsertNewPlayer from './partials/InsertNewPlayer';
 import Container from '../../common/Container';
 import PlayersList from './partials/PlayersList';
@@ -21,9 +21,9 @@ const CreatePlayers = () => {
 
   const availableColors = useMemo(() => {
     if (players.length > 0) {
-      return tailwindColorList.filter(baseColor => !players.find(({ color }) => color === baseColor));
+      return coinColorsList.filter(baseColor => !players.find(({ color }) => color === baseColor));
     }
-    return tailwindColorList;
+    return coinColorsList;
   }, [players]);
 
   const addPlayer = (p: CreationPlayer) => {
