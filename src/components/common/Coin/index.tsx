@@ -1,6 +1,6 @@
 /** @format */
 
-import { memo } from 'react';
+import { memo, useEffect, useState } from 'react';
 import classes from './coin.module.scss';
 import classNames from 'classnames';
 
@@ -13,19 +13,28 @@ type Props = {
 const Coin = memo(({ color, dark, perspective }: Props) => {
   const bgColor = color ? `bg-${color}-500` : `bg-neutral-700`;
   const bgShadowColor = color ? `bg-${color}-700` : `bg-neutral-900`;
+  const [isDark, setIsDark] = useState(false);
+
+  useEffect(() => {
+    if (dark != null && isDark !== dark) {
+      setTimeout(() => {
+        return setIsDark(dark);
+      }, 500);
+    }
+  }, [dark]);
+
   return (
-    <div className={classNames(classes.wrapper, { perspective })}>
-      <div className={classNames(classes.coinContainer)}>
-        <div className={classNames(classes.coinShadow, bgShadowColor)} />
-        <div className={classNames(classes.coin, bgColor)}>
-          <div
-            className={classNames('bg-opacity-20 w-full h-full rounded-full shadow transition-base', {
-              'bg-white': !dark,
-              'bg-black': dark,
-            })}
-          />
-        </div>
-      </div>
+    <div className={classNames(classes.coin, { dark: isDark, perspective })}>
+      <footer className={classNames(classes.back, bgColor)}>
+        <div className={classes.coinBody} />
+      </footer>
+      <aside className={classNames(classes.lateral, bgShadowColor)} />
+      <section className={classNames(classes.middle, bgShadowColor)} />
+      <section className={classNames(classes.middle, bgShadowColor)} />
+      <section className={classNames(classes.middle, bgShadowColor)} />
+      <header className={classNames(classes.front, bgColor)}>
+        <div className={classes.coinBody} />
+      </header>
     </div>
   );
 });

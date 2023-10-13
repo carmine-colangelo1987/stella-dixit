@@ -61,11 +61,12 @@ const SelectionBoard = memo(({ start }: Props) => {
   };
 
   const moveCoin = (stopAt: number) => {
+    console.log({ stopAt });
     if (stepRefs.current.length > 0) {
       let interval = setInterval(() => {
         setUserCoinStep(prevStep => {
-          const nextStep = (prevStep == null ? -1 : prevStep) + 1;
-          if (nextStep === stepRefs.current.length || nextStep === stopAt) {
+          const nextStep = (prevStep ?? 0) + 1;
+          if (nextStep === stepRefs.current.length || nextStep > stopAt) {
             clearInterval(interval);
             onCompleteAnimationDelay();
             return prevStep;

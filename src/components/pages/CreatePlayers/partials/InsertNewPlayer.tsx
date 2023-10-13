@@ -57,7 +57,7 @@ const InsertNewPlayer = memo(({ availableColors, addPlayer }: Props) => {
                       onClick={() => setColor(_c => (c === _c ? '' : c))}
                       className={`w-12 aspect-sqare rounded-full ${color === c ? 'active' : ''}`}
                     >
-                      <Coin color={c} dark />
+                      <Coin color={c} />
                     </button>
                   ))}
                 </div>

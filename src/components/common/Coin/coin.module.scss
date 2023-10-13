@@ -1,29 +1,69 @@
 /** @format */
 
-.wrapper {
-  --coin-size: 95%;
-  --shadow-size: var(--coin-size);
-  perspective: 300px;
-  @apply transition-base mx-auto;
+.coin {
+  --coin-perspective: rotateX(0deg) translateY(0);
+  @apply transition-base mx-auto rounded-full shadow-md;
   max-width: 120px;
+  aspect-ratio: 1;
+  transform-style: preserve-3d;
+  transform: var(--coin-perspective) rotateY(0deg) translateZ(0px);
+  &:global(.dark) {
+    transform: var(--coin-perspective) rotateY(180deg) translateZ(-10px);
+  }
   &:global(.perspective) {
-    --coin-size: 93%;
-    --shadow-size: 90%;
-    :local(.coinContainer) {
-      transform: rotateX(45deg);
-    }
+    --coin-perspective: rotateX(30deg) translateY(2.5%);
+    box-shadow: none;
   }
 }
-.coinContainer {
-  @apply w-full aspect-square flex justify-center items-start relative transition-base;
+
+.front,
+.middle,
+.lateral,
+.back {
+  @apply rounded-full w-full h-full flex items-center justify-center;
 }
-.coin {
-  width: var(--coin-size);
-  @apply rounded-full aspect-square relative z-20 p-[12%] transition-base;
+
+.coinBody {
+  @apply w-3/4 aspect-square rounded-full mx-auto shadow-md;
+  background: url('../../../assets/coins-bg.png') left center no-repeat;
+  background-size: auto 100%;
 }
-.coinShadow {
-  width: var(--shadow-size);
-  @apply rounded-full aspect-square transition-base;
-  @apply block absolute bottom-0 left-1/2 z-10;
-  transform: translateX(-50%);
+
+.front {
+  transform: translateZ(10px);
+  position: absolute;
+  top: 0;
+  .coinBody {
+    @apply bg-white/20;
+  }
+}
+
+.back {
+  transform: scaleX(-1);
+  .coinBody {
+    @apply bg-black/20;
+    background-position: right center;
+  }
+}
+
+.lateral {
+  transform: rotateY(-90deg);
+  transform-origin: 0;
+  position: absolute;
+  top: 0;
+  border-radius: 0;
+  left: 50%;
+  width: 10px;
+}
+
+.middle {
+  transform: translateZ(1px);
+  position: absolute;
+  top: 0;
+  & + & {
+    transform: translateZ(5px);
+  }
+  & + & + & {
+    transform: translateZ(9px);
+  }
 }
