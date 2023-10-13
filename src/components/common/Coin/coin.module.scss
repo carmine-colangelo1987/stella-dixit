@@ -1,10 +1,14 @@
 /** @format */
 
-.coin {
-  --coin-perspective: rotateX(0deg) translateY(0);
-  @apply transition-base mx-auto rounded-full shadow-md;
+.coinWrapper {
+  @apply transition-base mx-auto w-full;
   max-width: 120px;
   aspect-ratio: 1;
+}
+
+.coin {
+  --coin-perspective: rotateX(0deg) translateY(0);
+  @apply transition-base rounded-full shadow-md aspect-square;
   transform-style: preserve-3d;
   transform: var(--coin-perspective) rotateY(0deg) translateZ(0px);
   &:global(.dark) {
@@ -20,30 +24,30 @@
 .middle,
 .lateral,
 .back {
-  @apply rounded-full w-full h-full flex items-center justify-center;
+  @apply rounded-full w-full h-full flex items-center justify-center transition-base;
 }
 
 .coinBody {
   @apply w-3/4 aspect-square rounded-full mx-auto shadow-md;
   background: url('../../../assets/coins-bg.png') left center no-repeat;
   background-size: auto 100%;
+  header & {
+    @apply bg-white/20;
+  }
+  footer & {
+    @apply bg-black/20;
+    background-position: right center;
+  }
 }
 
 .front {
   transform: translateZ(10px);
   position: absolute;
   top: 0;
-  .coinBody {
-    @apply bg-white/20;
-  }
 }
 
 .back {
   transform: scaleX(-1);
-  .coinBody {
-    @apply bg-black/20;
-    background-position: right center;
-  }
 }
 
 .lateral {

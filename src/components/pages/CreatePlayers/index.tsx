@@ -20,10 +20,12 @@ const CreatePlayers = () => {
   const expectedPlayers = useAppSelector(s => s.matchDataReducer.matchData?.expected_users);
 
   const availableColors = useMemo(() => {
-    if (players.length > 0) {
-      return coinColorsList.filter(baseColor => !players.find(({ color }) => color === baseColor));
-    }
-    return coinColorsList;
+    return coinColorsList.map(baseColor => {
+      return {
+        color: baseColor,
+        disabled: !!players.find(({ color }) => color === baseColor),
+      };
+    });
   }, [players]);
 
   const addPlayer = (p: CreationPlayer) => {

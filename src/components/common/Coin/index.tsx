@@ -24,17 +24,19 @@ const Coin = memo(({ color, dark, perspective }: Props) => {
   }, [dark]);
 
   return (
-    <div className={classNames(classes.coin, { dark: isDark, perspective })}>
-      <footer className={classNames(classes.back, bgColor)}>
-        <div className={classes.coinBody} />
-      </footer>
-      <aside className={classNames(classes.lateral, bgShadowColor)} />
-      <section className={classNames(classes.middle, bgShadowColor)} />
-      <section className={classNames(classes.middle, bgShadowColor)} />
-      <section className={classNames(classes.middle, bgShadowColor)} />
-      <header className={classNames(classes.front, bgColor)}>
-        <div className={classes.coinBody} />
-      </header>
+    <div className={classNames(classes.coinWrapper, { 'opacity-50': !color })}>
+      <div className={classNames(classes.coin, { dark: isDark, perspective })}>
+        <footer className={classNames(classes.back, bgColor)}>
+          <div className={classes.coinBody} />
+        </footer>
+        <aside className={classNames(classes.lateral, bgShadowColor)} />
+        <section className={classNames(classes.middle, bgShadowColor)} />
+        <section className={classNames(classes.middle, bgShadowColor)} />
+        <section className={classNames(classes.middle, bgShadowColor)} />
+        <header className={classNames(classes.front, bgColor)}>
+          <div className={classes.coinBody} />
+        </header>
+      </div>
     </div>
   );
 });

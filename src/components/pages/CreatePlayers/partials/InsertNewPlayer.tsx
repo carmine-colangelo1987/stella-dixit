@@ -8,10 +8,10 @@ import FormLabel from '../../../common/FormLabel';
 import Card from '../../../common/Card';
 import Container from '../../../common/Container';
 import { CreationPlayer } from '../../../../types';
-import Coin from '../../../common/Coin';
+import ButtonColorCoin from './ButtonColorCoin';
 
 type Props = {
-  availableColors: string[];
+  availableColors: { color: string; disabled: boolean }[];
   addPlayer: (p: CreationPlayer) => void;
 };
 
@@ -50,15 +50,13 @@ const InsertNewPlayer = memo(({ availableColors, addPlayer }: Props) => {
                 <FormLabel className={'mb-2'}>Scegli il colore</FormLabel>
                 <div className="flex gap-2 flex-wrap">
                   {availableColors.map(c => (
-                    <button
-                      type="button"
-                      key={c}
-                      title={c}
-                      onClick={() => setColor(_c => (c === _c ? '' : c))}
-                      className={`w-12 aspect-sqare rounded-full ${color === c ? 'active' : ''}`}
-                    >
-                      <Coin color={c} />
-                    </button>
+                    <ButtonColorCoin
+                      key={c.color}
+                      color={c.color}
+                      disabled={c.disabled}
+                      active={c.color === color}
+                      onClick={() => setColor(_c => (c.color === _c ? '' : c.color))}
+                    />
                   ))}
                 </div>
               </section>
