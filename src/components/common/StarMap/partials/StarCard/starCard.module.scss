@@ -15,4 +15,16 @@
       @apply absolute inset-0 bg-black bg-opacity-20 block;
     }
   }
+  &:global(.revealed) {
+    @apply shadow-md;
+    transform: scale(1.2);
+  }
+  &:global(.matched) {
+    transform: scale(1);
+    background-color: green;
+  }
+  &:global(.unmatched) {
+    transform: scale(1);
+    background-color: red;
+  }
 }

@@ -15,6 +15,7 @@ import CurrentRoundIndex from './pages/CurrentRound/CurrentRound';
 import MatchResult from './pages/MatchResult';
 import SelectionResult from './pages/SelectionResult';
 import Studio from './pages/Studio';
+import RoundReveal from './pages/RoundReveal';
 
 function App() {
   return (
@@ -33,7 +34,7 @@ function App() {
               <Route index element={<CurrentRoundIndex />} />
               <Route path={AppRoutes.ROUND_ASSOCIATION} element={<RoundSelection />} />
               <Route path={AppRoutes.ROUND_ANNOUNCE} element={<SelectionResult />} />
-              <Route path={AppRoutes.ROUND_REVEAL} element={<>Fase Matching</>} />
+              <Route path={AppRoutes.ROUND_REVEAL} element={<RoundReveal />} />
             </Route>
             <Route path={AppRoutes.MATCH_RESULT} element={<MatchResult />} />
           </Route>
