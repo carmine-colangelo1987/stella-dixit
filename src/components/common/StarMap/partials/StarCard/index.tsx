@@ -3,27 +3,35 @@
 import { memo } from 'react';
 import classNames from 'classnames';
 import classes from './starCard.module.scss';
-import { RoundPhase } from '../../../../../types';
+import { MatchedCard, RoundPhase } from '../../../../../types';
+import Star from '../../../Star';
 
 type StarCardSelected = {
   id: string;
+  dark?: boolean;
   selected?: boolean;
   disabled?: boolean;
   revealed?: boolean;
-  matched?: boolean;
-  unmatched?: boolean;
+  matched?: MatchedCard;
   onClick: (id: string) => void;
   variant: Extract<RoundPhase, 'ASSOCIATION' | 'REVEAL'>;
 };
 
 const StarCard = memo(
-  ({ id, variant, selected, revealed, matched, unmatched, disabled, onClick }: StarCardSelected) => {
+  ({ id, variant, selected, dark, revealed, matched, disabled, onClick }: StarCardSelected) => {
     return (
       <button
         disabled={disabled}
         className={classNames(
           classes.card,
-          { selected, disabled, revealed, matched, unmatched },
+          {
+            selected: variant === 'ASSOCIATION' && selected,
+            revealable: variant === 'REVEAL' && selected,
+            disabled,
+            revealed,
+            matched: !!matched,
+            superSpark: matched?.isSuperSpark,
+          },
           variant.toLowerCase(),
         )}
         onClick={() => onClick(id)}
@@ -42,6 +50,15 @@ const StarCard = memo(
               />
             </g>
           </svg>
+        )}
+        {selected && variant === 'REVEAL' && (
+          <aside className="flex flex-col items-center leading-none text-[0.6em] w-1/3 mx-auto">
+            <Star isSuperSpark fill={matched?.isSuperSpark} />
+            <Star fill={!!matched && !dark} />
+            <div className="translate-y-[-10%]">
+              <Star fill={!!matched} />
+            </div>
+          </aside>
         )}
       </button>
     );

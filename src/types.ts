@@ -65,3 +65,8 @@ export type RoundResultData = {
   userId: RoundData['id'];
   points: RoundData['points'];
 };
+
+export type MatchedCard = {
+  id: string;
+  isSuperSpark: boolean;
+};

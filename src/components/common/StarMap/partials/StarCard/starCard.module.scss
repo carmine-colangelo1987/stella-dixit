@@ -7,6 +7,9 @@
     @apply shadow-md;
     transform: rotate(-2deg);
   }
+  &:global(.revealable) {
+    @apply shadow-md;
+  }
   &:global(.disabled) {
     @apply shadow-none;
     transform: scale(0.95);

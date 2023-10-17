@@ -11,9 +11,11 @@ import {
   faSpinner,
   faArrowRotateBackward,
   faArrowRotateForward,
+  faStar,
 } from '@fortawesome/free-solid-svg-icons';
+import { faStar as regularFaStar } from '@fortawesome/free-regular-svg-icons';
 
-const lib = {
+export const AppIconsLibrary = {
   'check-square': faCheckSquare,
   coffee: faCoffee,
   'rotate-forward': faRotateForward,
@@ -22,11 +24,19 @@ const lib = {
   'arrow-rotate-backward': faArrowRotateBackward,
   'arrow-rotate-forward': faArrowRotateForward,
   'flag-checkered': faFlagCheckered,
+  'star-solid': faStar,
+  star: regularFaStar,
 };
 
-export type AppIconName = keyof typeof lib;
+export type AppIconName = keyof typeof AppIconsLibrary;
 
-library.add(...Object.values(lib));
+console.log(AppIconsLibrary);
+
+library.add(...Object.values(AppIconsLibrary));
+
+/**
+ * @see https://fontawesome.com/search
+ */
 
 const FonticonProvider = ({ children }: PropsWithChildren) => {
   return <>{children}</>;

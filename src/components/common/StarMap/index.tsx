@@ -6,7 +6,7 @@ import RotationToolbar from '../RotationToolbar';
 import MiniMap from './partials/MiniMap';
 import StarCard from './partials/StarCard';
 import { useAppSelector } from '../../../hooks/useStore';
-import { RoundPhase } from '../../../types';
+import { MatchedCard, RoundPhase } from '../../../types';
 
 type StarMapProps = {
   variant?: Extract<RoundPhase, 'ASSOCIATION' | 'REVEAL'>;
@@ -15,8 +15,7 @@ type StarMapProps = {
     selected?: boolean;
     disabled?: boolean;
     revealed?: boolean;
-    matched?: boolean;
-    unmatched?: boolean;
+    matched?: MatchedCard;
   }[];
   onClickCardHandler: (id: string) => void;
 };

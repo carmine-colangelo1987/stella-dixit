@@ -18,9 +18,17 @@ export const roundData = createSlice({
         state.selectedCards = state.selectedCards.concat(action.payload);
       }
     },
+    setCurrentRevealedCard: (state, action: PayloadAction<string>) => {
+      state.currentRevealedCard = action.payload;
+      state.revealedCards.push(action.payload);
+    },
+    setMatchedCard: (state, action: PayloadAction<string>) => {
+      state.currentRevealedCard = action.payload;
+      state.revealedCards.push(action.payload);
+    },
   },
 });
 
-export const { toggleSelected } = roundData.actions;
+export const { toggleSelected, setCurrentRevealedCard } = roundData.actions;
 
 export default roundData.reducer;

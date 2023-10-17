@@ -9,16 +9,18 @@ import { plancia } from '../../../constants/plancia';
 const RoundSelection = () => {
   const [selectedCards, onToggleCard] = useRoundSelectedCard();
   const counter = selectedCards.length === 1 ? 'carta' : 'carte';
+
   const cardsList = useMemo(() => {
     return plancia.map(id => {
       const selected = selectedCards.includes(id);
       return {
         id,
         selected,
-        disabled: !selected,
+        disabled: !selected && selectedCards.length >= 10,
       };
     });
   }, [selectedCards]);
+
   return (
     <div className="overflow-hidden">
       <Container>
