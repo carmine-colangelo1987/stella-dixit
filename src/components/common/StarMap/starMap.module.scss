@@ -13,3 +13,13 @@
     @apply text-lg;
   }
 }
+
+:global(.hasCurrentCard) {
+  .grid > *,
+  :global(.blur-on-selected) {
+    filter: blur(1px) brightness(0.95);
+  }
+  :global(.isCurrentCard) {
+    filter: none !important;
+  }
+}

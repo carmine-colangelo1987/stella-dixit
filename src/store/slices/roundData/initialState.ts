@@ -12,6 +12,7 @@ export type TRoundData = {
   matchedCards: MatchedCard[];
   dark?: boolean;
   fallen?: boolean;
+  fallenCard?: string;
 };
 
 export const initialState: TRoundData = {

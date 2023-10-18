@@ -22,15 +22,13 @@ const RoundSelection = () => {
   }, [selectedCards]);
 
   return (
-    <div className="overflow-hidden">
-      <Container>
-        <p className="text-center">
-          Hai selezionato {selectedCards.length} {counter}
-          <small className="text-sm block text-slate-400">non puoi selezionare più di 10 carte!</small>
-        </p>
-        <StarMap cardsList={cardsList} onClickCardHandler={onToggleCard} />
-      </Container>
-    </div>
+    <Container className="relative pt-8">
+      <p className="text-center">
+        Hai selezionato {selectedCards.length} {counter}
+        <small className="text-sm block text-slate-400">non puoi selezionare più di 10 carte!</small>
+      </p>
+      <StarMap cardsList={cardsList} onClickCardHandler={onToggleCard} />
+    </Container>
   );
 };
 

@@ -22,14 +22,21 @@ type StarMapProps = {
 
 const StarMap = ({ variant = 'ASSOCIATION', cardsList, onClickCardHandler }: StarMapProps) => {
   const playerColor = useAppSelector(s => s.playerDataReducer?.player?.color ?? 'orange');
+  const hasCurrentCard = useAppSelector(s => s.roundDataReducer.currentRevealedCard != null);
 
   return (
-    <div className="py-4">
+    <div className={classNames('py-4', { hasCurrentCard })}>
       <RotationToolbar>
         <MiniMap color={playerColor}>
-          <div className={classNames(classes.grid)}>
+          <div className={classNames(classes.grid, variant)}>
             {cardsList.map(props => (
-              <StarCard key={props.id} variant={variant} onClick={onClickCardHandler} {...props} />
+              <StarCard
+                key={props.id}
+                color={playerColor}
+                variant={variant}
+                onClick={onClickCardHandler}
+                {...props}
+              />
             ))}
           </div>
         </MiniMap>

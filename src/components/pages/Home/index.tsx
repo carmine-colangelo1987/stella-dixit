@@ -32,6 +32,10 @@ const Home = (props: Props) => {
             <Icon icon={'coffee'} className={'mr-2'} /> inizia una nuova partita
           </Button>
         </Link>
+
+        <Button variant="neutral" className="w-full" onClick={() => localStorage.clear()}>
+          Pulisci cache
+        </Button>
       </div>
     </Container>
   );

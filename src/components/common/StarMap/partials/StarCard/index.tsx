@@ -4,11 +4,12 @@ import { memo } from 'react';
 import classNames from 'classnames';
 import classes from './starCard.module.scss';
 import { MatchedCard, RoundPhase } from '../../../../../types';
-import Star from '../../../Star';
+import { useAppSelector } from '../../../../../hooks/useStore';
+import StarCardRevealContent from './StarCardRevealContent';
 
 type StarCardSelected = {
   id: string;
-  dark?: boolean;
+  color: string;
   selected?: boolean;
   disabled?: boolean;
   revealed?: boolean;
@@ -18,22 +19,31 @@ type StarCardSelected = {
 };
 
 const StarCard = memo(
-  ({ id, variant, selected, dark, revealed, matched, disabled, onClick }: StarCardSelected) => {
+  ({ id, variant, color, selected, revealed, matched, disabled, onClick }: StarCardSelected) => {
+    const isCurrentCard = useAppSelector(s => s.roundDataReducer.currentRevealedCard === id);
+    const dark = useAppSelector(s => s.roundDataReducer.dark);
+    const fallen = useAppSelector(s => s.roundDataReducer.fallen);
+    const fallenCard = useAppSelector(s => s.roundDataReducer.fallenCard === id);
+    const selectedCard = variant === 'ASSOCIATION' && selected;
+    const revealable = variant === 'REVEAL' && selected && !revealed;
+    const unclickable = disabled || fallen || (variant === 'REVEAL' && !revealable);
+    const isFallenInDark = fallen && dark;
+    console.log(isFallenInDark);
+
     return (
       <button
-        disabled={disabled}
-        className={classNames(
-          classes.card,
-          {
-            selected: variant === 'ASSOCIATION' && selected,
-            revealable: variant === 'REVEAL' && selected,
-            disabled,
-            revealed,
-            matched: !!matched,
-            superSpark: matched?.isSuperSpark,
-          },
-          variant.toLowerCase(),
-        )}
+        disabled={unclickable}
+        className={classNames(classes.card, {
+          selected: selectedCard,
+          revealable,
+          disabled,
+          revealed,
+          matched: !!matched,
+          superSpark: matched?.isSuperSpark,
+          fallenCard,
+          isCurrentCard,
+          fallen,
+        })}
         onClick={() => onClick(id)}
       >
         {selected && variant === 'ASSOCIATION' && (
@@ -52,14 +62,16 @@ const StarCard = memo(
           </svg>
         )}
         {selected && variant === 'REVEAL' && (
-          <aside className="flex flex-col items-center leading-none text-[0.6em] w-1/3 mx-auto">
-            <Star isSuperSpark fill={matched?.isSuperSpark} />
-            <Star fill={!!matched && !dark} />
-            <div className="translate-y-[-10%]">
-              <Star fill={!!matched} />
-            </div>
-          </aside>
+          <StarCardRevealContent
+            color={color}
+            isSuperSpark={matched?.isSuperSpark}
+            revealable={revealable}
+            fallenCard={fallenCard}
+            fallen={fallen}
+            matched={!!matched}
+          />
         )}
+        <div className={classes.backFace} />
       </button>
     );
   },

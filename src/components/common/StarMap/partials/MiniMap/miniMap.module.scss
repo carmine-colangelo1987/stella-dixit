@@ -1,7 +1,7 @@
 /** @format */
 
 .map {
-  @apply w-full flex items-center relative mx-auto;
+  @apply w-full flex items-center relative mx-auto transition-base;
   font-size: clamp(16px, 2vw, 32px);
   aspect-ratio: 1;
   min-width: 300px;

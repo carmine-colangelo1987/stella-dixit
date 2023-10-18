@@ -1,33 +1,69 @@
 /** @format */
 
+%disabled {
+  @apply shadow;
+  transform: var(--disabled-scale) var(--disabled-rotateY) var(--disabled-rotate);
+  z-index: 1;
+  .backFace {
+    opacity: 1;
+  }
+}
+
 .card {
-  @apply rounded bg-gray-50 shadow relative overflow-hidden;
-  transition: all 0.3s;
+  --disabled-scale: scale(0.9);
+  --disabled-rotateY: rotateY(-180deg);
+  --disabled-rotate: rotate(0deg);
+  @apply relative rounded bg-neutral-50 shadow-md relative transition-base;
+  transform-style: preserve-3d;
   &:global(.selected) {
-    @apply shadow-md;
     transform: rotate(-2deg);
   }
   &:global(.revealable) {
-    @apply shadow-md;
   }
   &:global(.disabled) {
-    @apply shadow-none;
-    transform: scale(0.95);
-    &:after {
-      content: '';
-      @apply absolute inset-0 bg-black bg-opacity-20 block;
-    }
+    @extend %disabled;
   }
-  &:global(.revealed) {
-    @apply shadow-md;
+  &:global(.isCurrentCard) {
+    @apply shadow-lg;
     transform: scale(1.2);
+    z-index: 200;
   }
   &:global(.matched) {
-    transform: scale(1);
-    background-color: green;
+    @extend %disabled;
   }
-  &:global(.unmatched) {
-    transform: scale(1);
-    background-color: red;
+  &:global(.superSpark) {
+    @extend %disabled;
   }
+  &:global(.fallenCard) {
+    --disabled-rotate: rotate(-2deg);
+    @extend %disabled;
+  }
+}
+
+.iconWrap {
+  @apply absolute top-1/2 left-1/2 p-[10%] flex items-center justify-center z-10;
+  width: 75%;
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%) scaleX(-1);
+  animation: fadeIn 300ms 300ms both;
+  opacity: 1;
+  svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 100%;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+}
+
+.backFace {
+  @apply absolute inset-0 rounded border-2 border-white transition-base;
+  opacity: 0;
+  background: transparent url('../../../../../assets/card-backface.png') center no-repeat;
+  background-size: cover;
 }

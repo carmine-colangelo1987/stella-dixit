@@ -12,6 +12,10 @@ import {
   faArrowRotateBackward,
   faArrowRotateForward,
   faStar,
+  faPersonFalling,
+  faCheck,
+  faCheckDouble,
+  faEye,
 } from '@fortawesome/free-solid-svg-icons';
 import { faStar as regularFaStar } from '@fortawesome/free-regular-svg-icons';
 
@@ -26,6 +30,10 @@ export const AppIconsLibrary = {
   'flag-checkered': faFlagCheckered,
   'star-solid': faStar,
   star: regularFaStar,
+  'person-falling': faPersonFalling,
+  check: faCheck,
+  'check-double': faCheckDouble,
+  eye: faEye,
 };
 
 export type AppIconName = keyof typeof AppIconsLibrary;

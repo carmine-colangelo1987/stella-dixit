@@ -13,7 +13,7 @@ const MiniMap = memo(({ children, color }: PropsWithChildren<MiniMapProps>) => {
     <div className={classNames(classes.map, `text-${color}-500`)}>
       <div className="absolute inset-0 z-10">
         <svg
-          className={classes.figure}
+          className={classNames(classes.figure, 'blur-on-selected')}
           version="1.1"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 150 150"
@@ -40,7 +40,7 @@ const MiniMap = memo(({ children, color }: PropsWithChildren<MiniMapProps>) => {
         </svg>
       </div>
       <div className={classes.container}>
-        <aside className={classes.moonPosition} />
+        <aside className={classNames(classes.moonPosition, 'blur-on-selected')} />
         <div className={classes.grid}>{children}</div>
       </div>
     </div>

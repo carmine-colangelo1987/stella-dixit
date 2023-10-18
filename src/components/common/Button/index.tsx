@@ -6,7 +6,7 @@ import classNames from 'classnames';
 import classes from './button.module.scss';
 
 type Props = {
-  variant?: 'primary' | 'secondary';
+  variant?: 'primary' | 'secondary' | 'neutral';
   size?: 'lg';
   loading?: boolean;
 } & ButtonHTMLAttributes<any>;

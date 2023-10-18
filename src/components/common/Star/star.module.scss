@@ -1,0 +1,17 @@
+/** @format */
+
+.figure {
+  @apply block w-full aspect-square;
+  :global(.star) {
+    fill: transparent;
+    fill-opacity: 0.75;
+    stroke: currentColor;
+    stroke-width: 10;
+  }
+  :global(.circle) {
+    fill: currentColor;
+  }
+  &:global(.fill) :global(.star) {
+    fill: currentColor;
+  }
+}

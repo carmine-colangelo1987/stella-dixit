@@ -21,6 +21,13 @@
     }
   }
 
+  &:global(.neutral) {
+    @apply text-white bg-neutral-500;
+    &:hover {
+      @apply bg-neutral-700;
+    }
+  }
+
   &:global(.lg) {
     @apply text-lg;
   }

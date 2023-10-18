@@ -1,17 +1,16 @@
 /** @format */
 
 import { memo } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { FontAwesomeIcon, FontAwesomeIconProps } from '@fortawesome/react-fontawesome';
 import { AppIconName, AppIconsLibrary } from '../../../fontawesome/FonticonProvider';
 
 type Props = {
-  className?: string;
   icon: AppIconName;
-};
+} & Omit<FontAwesomeIconProps, 'icon'>;
 
-const Icon = memo(({ className, icon }: Props) => {
+const Icon = memo(({ className, icon, ...rest }: Props) => {
   const iconDefinition = AppIconsLibrary[icon];
-  return <FontAwesomeIcon icon={iconDefinition} className={className} />;
+  return <FontAwesomeIcon icon={iconDefinition} className={className} {...rest} />;
 });
 
 Icon.displayName = 'Icon';
