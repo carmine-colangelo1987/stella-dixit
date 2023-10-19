@@ -1,89 +1,39 @@
 /** @format */
 import { useState } from 'react';
-import { useLazyCreateNewMatchQuery } from '../../../store/api/match';
 import PageTitle from '../../common/PageTitle';
 import Container from '../../common/Container';
-import FormInput from '../../common/FormInput';
-import Button from '../../common/Button';
-import { useNavigate } from 'react-router-dom';
-import { setMatchRoute } from '../../../router/routes';
-import RadioSelect from '../../common/RadioSelect';
-import { TOption } from '../../../types';
+import NewMatchStep1 from './partials/NewMatchStep1';
+import NewMatchStep2 from './partials/NewMatchStep2';
+import NewMatchStep3 from './partials/NewMatchStep3';
+import NewMatchStep4 from './partials/NewMatchStep4';
 
-const userOptions: Array<TOption<number>> = Array.from({ length: 15 }, (_, i) => ({
-  id: 'users' + i,
-  value: 2 + i,
-}));
-const roundOptions: Array<TOption<number>> = Array.from({ length: 5 }, (_, i) => ({
-  id: 'rounds_' + i,
-  value: 4 + i * 2,
-}));
+enum Steps {
+  title,
+  totalPlayers,
+  totalRounds,
+  confirm,
+}
 
 const NewMatch = () => {
-  const matchDay = new Intl.DateTimeFormat('it-IT', {
-    year: 'numeric',
-    month: '2-digit',
-    day: '2-digit',
-  }).format(new Date());
+  const [step, setStep] = useState<Steps>(Steps.title);
 
-  const navigate = useNavigate();
-  const [title, setTitle] = useState('');
-  const [players, setPlayers] = useState<number>(2);
-  const [rounds, setRounds] = useState<number>(4);
-
-  const [createNewMatchHandle] = useLazyCreateNewMatchQuery();
-
-  const onCreateNewMatch = () => {
-    if (title && players >= 2 && rounds >= 4) {
-      createNewMatchHandle({ title, expected_users: players, total_rounds: rounds }).then(r => {
-        const matchId = r.data?.data;
-        if (matchId) {
-          navigate(setMatchRoute(matchId));
-        }
-      });
-    }
+  const onStepChange = (s: Steps) => () => {
+    setStep(s);
   };
 
   return (
     <Container className="space-y-8">
       <PageTitle>Nuova Partita</PageTitle>
       <article className="space-y-6 text-center">
-        <section>
-          <FormInput
-            id="title"
-            type="text"
-            label={'Inserisci il titolo della nuova partita'}
-            value={title}
-            placeholder={`Partita del ${matchDay}`}
-            onChange={e => setTitle(e.target.value)}
-          />
-        </section>
-
-        <section>
-          <div className="max-w-[320px] mx-auto">
-            <RadioSelect<number>
-              label="Numero di cacciatori di stelle"
-              name={'expected_users'}
-              options={userOptions}
-              onChange={o => setPlayers(o.value)}
-            />
-          </div>
-        </section>
-
-        <section>
-          <div className="max-w-[320px] mx-auto">
-            <RadioSelect<number>
-              label="Numero di turni"
-              name={'total_rounds'}
-              options={roundOptions}
-              onChange={o => setRounds(o.value)}
-            />
-          </div>
-        </section>
+        {step === Steps.title && <NewMatchStep1 onNext={onStepChange(Steps.totalPlayers)} />}
+        {step === Steps.totalPlayers && (
+          <NewMatchStep2 onNext={onStepChange(Steps.totalRounds)} onPrev={onStepChange(Steps.title)} />
+        )}
+        {step === Steps.totalRounds && (
+          <NewMatchStep3 onNext={onStepChange(Steps.confirm)} onPrev={onStepChange(Steps.totalPlayers)} />
+        )}
+        {step === Steps.confirm && <NewMatchStep4 onPrev={onStepChange(Steps.totalRounds)} />}
       </article>
-      <Button className="w-full" onClick={onCreateNewMatch}>
-        Procedi
-      </Button>
     </Container>
   );
 };

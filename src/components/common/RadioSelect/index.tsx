@@ -9,18 +9,32 @@ type Props<Value extends string | number> = {
   options: TOption<Value>[];
   onChange: (o: TOption<Value>) => void;
   label?: string;
+  selected?: Value;
 };
 
-function RadioSelect<Value extends string | number>({ name, label, options, onChange }: Props<Value>) {
+function RadioSelect<Value extends string | number>({
+  name,
+  label,
+  selected,
+  options,
+  onChange,
+}: Props<Value>) {
   return (
-    <div>
+    <div className="max-w-xs mx-auto">
       {label && <FormLabel>{label}</FormLabel>}
       <div className={classes.list}>
         {options.map(o => {
           return (
             <label key={o.id} className={classes.option}>
               {o.value}
-              <input name={name} type="radio" className="absolute opacity-0" onChange={() => onChange(o)} />
+              <input
+                name={name}
+                value={o.value}
+                checked={selected === o.value}
+                type="radio"
+                className="absolute opacity-0"
+                onChange={() => onChange(o)}
+              />
             </label>
           );
         })}

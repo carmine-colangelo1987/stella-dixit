@@ -75,4 +75,9 @@ export type MatchedCard = {
 
 // utils
 
+export type StepProps = {
+  onNext?: () => void;
+  onPrev?: () => void;
+};
+
 export type TOption<Value extends string | number> = { id: string; value: Value };

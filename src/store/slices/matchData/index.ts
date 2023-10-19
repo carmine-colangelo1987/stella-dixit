@@ -20,17 +20,35 @@ export const matchData = createSlice({
         delete state.matchId;
       }
     },
-    setNewMatchTitle: (state, action: PayloadAction<string>) => {
-      (state.newMatchData ?? {}).matchTitle = action.payload;
+    setNewMatchTitle: (state, action: PayloadAction<string | undefined>) => {
+      if (!action.payload) {
+        delete state.newMatchData?.matchTitle;
+      } else {
+        state.newMatchData = {
+          ...state.newMatchData,
+          matchTitle: action.payload,
+        };
+      }
     },
-    setNewMatchExpectedUsers: (state, action: PayloadAction<number>) => {
-      (state.newMatchData ?? {}).expected_users = action.payload;
+    setNewMatchExpectedUsers: (state, action: PayloadAction<number | undefined>) => {
+      if (!action.payload) {
+        delete state.newMatchData?.expected_users;
+      } else {
+        state.newMatchData = {
+          ...state.newMatchData,
+          expected_users: action.payload,
+        };
+      }
     },
-    setNewMatchTotalRounds: (state, action: PayloadAction<number>) => {
-      state.newMatchData = {
-        ...state.newMatchData,
-        total_rounds: action.payload,
-      };
+    setNewMatchTotalRounds: (state, action: PayloadAction<number | undefined>) => {
+      if (!action.payload) {
+        delete state.newMatchData?.total_rounds;
+      } else {
+        state.newMatchData = {
+          ...state.newMatchData,
+          total_rounds: action.payload,
+        };
+      }
     },
     resetMatchData: () => initialState,
   },
