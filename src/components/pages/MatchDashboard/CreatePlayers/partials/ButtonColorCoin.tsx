@@ -2,7 +2,7 @@
 
 import { memo } from 'react';
 import classNames from 'classnames';
-import Coin from '../../../common/Coin';
+import Coin from '../../../../common/Coin';
 
 type Props = {
   color: string;

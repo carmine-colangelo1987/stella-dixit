@@ -1,17 +1,17 @@
 /** @format */
 
 import { useMemo } from 'react';
-import { CreationPlayer } from '../../../types';
-import PageTitle from '../../common/PageTitle';
-import { coinColorsList } from '../../../utils/tailwindColors';
+import { CreationPlayer } from '../../../../types';
+import PageTitle from '../../../common/PageTitle';
+import { coinColorsList } from '../../../../utils/tailwindColors';
 import InsertNewPlayer from './partials/InsertNewPlayer';
-import Container from '../../common/Container';
+import Container from '../../../common/Container';
 import PlayersList from './partials/PlayersList';
-import Button from '../../common/Button';
+import Button from '../../../common/Button';
 import { useNavigate } from 'react-router-dom';
-import { AppRoutes } from '../../../router/routes';
-import { useAppDispatch, useAppSelector } from '../../../hooks/useStore';
-import { addNewUser, deleteNewUser } from '../../../store/slices/playerData';
+import { AppRoutes } from '../../../../router/routes';
+import { useAppDispatch, useAppSelector } from '../../../../hooks/useStore';
+import { addNewUser, deleteNewUser } from '../../../../store/slices/playerData';
 
 const CreatePlayers = () => {
   const navigate = useNavigate();

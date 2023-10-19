@@ -40,27 +40,6 @@
   }
 }
 
-.iconWrap {
-  @apply absolute top-1/2 left-1/2 p-[10%] flex items-center justify-center z-10;
-  width: 75%;
-  aspect-ratio: 1;
-  transform: translate(-50%, -50%) scaleX(-1);
-  animation: fadeIn 300ms 300ms both;
-  opacity: 1;
-  svg {
-    display: block;
-    width: 100%;
-    height: auto;
-    max-height: 100%;
-  }
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-}
-
 .backFace {
   @apply absolute inset-0 rounded border-2 border-white transition-base;
   opacity: 0;

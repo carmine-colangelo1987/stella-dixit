@@ -1,9 +1,13 @@
 /** @format */
 
 import { memo, useEffect, useState } from 'react';
-import { removeCurrentRevealedCard, setFallen, setMatchedCard } from '../../../../../store/slices/roundData';
-import { useAppDispatch } from '../../../../../hooks/useStore';
-import Button from '../../../../common/Button';
+import {
+  removeCurrentRevealedCard,
+  setFallen,
+  setMatchedCard,
+} from '../../../../../../store/slices/roundData';
+import { useAppDispatch } from '../../../../../../hooks/useStore';
+import Button from '../../../../../common/Button';
 import classNames from 'classnames';
 import classes from './revelationModal.module.scss';
 

@@ -1,9 +1,9 @@
 /** @format */
 
-import PlayerCard from '../../../../common/PlayerCard';
+import PlayerCard from '../../../../../common/PlayerCard';
 import classes from './playersList.module.scss';
 import classNames from 'classnames';
-import { CreationPlayer } from '../../../../../types';
+import { CreationPlayer } from '../../../../../../types';
 
 type Props = {
   players: Array<CreationPlayer>;

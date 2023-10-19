@@ -3,10 +3,10 @@
 import { Fragment, memo, useEffect, useMemo, useRef, useState } from 'react';
 import BoardStep from '../BoardStep';
 import classes from './selectionBoard.module.scss';
-import Coin from '../../../../common/Coin';
-import { usePlayerSelectedCardList } from '../../../../../hooks/usePlayerSelectedCardList';
-import { useMatchId } from '../../../../../hooks/useMatchId';
-import { useAppSelector } from '../../../../../hooks/useStore';
+import Coin from '../../../../../common/Coin';
+import { usePlayerSelectedCardList } from '../../../../../../hooks/usePlayerSelectedCardList';
+import { useMatchId } from '../../../../../../hooks/useMatchId';
+import { useAppSelector } from '../../../../../../hooks/useStore';
 import classNames from 'classnames';
 
 type Props = {

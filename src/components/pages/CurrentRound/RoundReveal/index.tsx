@@ -1,12 +1,14 @@
 /** @format */
 
-import Container from '../../common/Container';
-import StarMap from '../../common/StarMap';
-import { useAppDispatch, useAppSelector } from '../../../hooks/useStore';
-import { useEffect, useMemo, useState } from 'react';
-import { plancia } from '../../../constants/plancia';
-import { setCurrentRevealedCard } from '../../../store/slices/roundData';
+import Container from '../../../common/Container';
+import StarMap from '../../../common/StarMap';
+import { useAppDispatch, useAppSelector } from '../../../../hooks/useStore';
+import { useEffect, useMemo } from 'react';
+import { plancia } from '../../../../constants/plancia';
+import { setCurrentRevealedCard } from '../../../../store/slices/roundData';
 import RevelationModal from './partials/RevelationModal';
+import { toast } from 'react-toastify';
+import PageTitle from '../../../common/PageTitle';
 
 const frasiOk = [
   'Ok!',
@@ -29,7 +31,6 @@ const RoundReveal = () => {
   const matchedCards = useAppSelector(s => s.roundDataReducer.matchedCards);
   const fallenAt = useAppSelector(s => s.roundDataReducer.fallenCard);
   const dark = useAppSelector(s => s.roundDataReducer.dark);
-  const [alertToShow, setAlertToShow] = useState<string | undefined>();
 
   const onClickCardHandler = (id: string) => {
     dispatch(setCurrentRevealedCard(id));
@@ -38,19 +39,13 @@ const RoundReveal = () => {
   useEffect(() => {
     if (matchedCards.length > 0) {
       const exclamationIndex = selectedCards.length === matchedCards.length ? 9 : matchedCards.length - 1;
-      setAlertToShow(frasiOk[exclamationIndex]);
-      setTimeout(() => {
-        setAlertToShow('');
-      }, 2000);
+      toast.success(frasiOk[exclamationIndex]);
     }
   }, [matchedCards]);
 
   useEffect(() => {
     if (fallenAt) {
-      setAlertToShow('Accidenti! Il tuo cercatore è caduto!');
-      setTimeout(() => {
-        setAlertToShow('');
-      }, 3000);
+      toast.warn('Accidenti! Il tuo cercatore è caduto!');
     }
   }, [fallenAt]);
 
@@ -77,6 +72,7 @@ const RoundReveal = () => {
 
   return (
     <Container className="relative pt-8">
+      <PageTitle>Rivelare</PageTitle>
       <p className="text-center mb-4">
         Clicca sulla carta che vuoi rivelare agli altri cercatori!
         <small className="text-sm block text-slate-400">
@@ -87,7 +83,6 @@ const RoundReveal = () => {
       <p className="text-center mb-4">
         {matchedCards.length}/{selectedCards.length}
       </p>
-      {alertToShow && <div className="text-3xl font-bold">{alertToShow}</div>}
       <div className="overflow-hidden">
         <StarMap variant="REVEAL" cardsList={cardsList} onClickCardHandler={onClickCardHandler} />
       </div>

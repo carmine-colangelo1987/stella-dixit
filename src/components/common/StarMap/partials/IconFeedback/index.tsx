@@ -3,7 +3,7 @@
 import { memo, useMemo } from 'react';
 import Icon from '../../../Icon';
 import classNames from 'classnames';
-import classes from './starCard.module.scss';
+import classes from './iconFeedback.module.scss';
 import { useAppSelector } from '../../../../../hooks/useStore';
 
 type Props = {

@@ -1,14 +1,14 @@
 /** @format */
 
 import PlayersList from '../CreatePlayers/partials/PlayersList';
-import Container from '../../common/Container';
-import PageTitle from '../../common/PageTitle';
-import { useAppDispatch, useAppSelector } from '../../../hooks/useStore';
-import { setPlayer } from '../../../store/slices/playerData';
-import { useLazyGetPlayersListQuery, useLazyPairUserQuery } from '../../../store/api/match';
+import Container from '../../../common/Container';
+import PageTitle from '../../../common/PageTitle';
+import { useAppDispatch, useAppSelector } from '../../../../hooks/useStore';
+import { setPlayer } from '../../../../store/slices/playerData';
+import { useLazyGetPlayersListQuery, useLazyPairUserQuery } from '../../../../store/api/match';
 import { useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { setRoundRoute } from '../../../router/routes';
+import { setRoundRoute } from '../../../../router/routes';
 
 const SelectPlayer = () => {
   const navigate = useNavigate();
@@ -29,9 +29,8 @@ const SelectPlayer = () => {
     if (!player.paired) {
       const confirmed = window.confirm(`Confermi di voler iniziare la partita con l'utente ${player.name}?`);
       if (confirmed) {
-        pairUser({ clientId, userId: player.id }).then(response => {
+        pairUser({ clientId, userId: player.id }).then(() => {
           console.log(location, setRoundRoute(matchId));
-          debugger;
           navigate(setRoundRoute(matchId));
           getPlayersListData();
           dispatch(setPlayer(players[i]));

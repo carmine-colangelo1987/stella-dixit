@@ -70,3 +70,7 @@ export type MatchedCard = {
   id: string;
   isSuperSpark: boolean;
 };
+
+// utils
+
+export type TOption<Value extends string | number> = { id: string; value: Value };

@@ -1,13 +1,13 @@
 /** @format */
 
 import { memo, useState } from 'react';
-import Button from '../../../common/Button';
-import FormInput from '../../../common/FormInput';
-import PlayerCard from '../../../common/PlayerCard';
-import FormLabel from '../../../common/FormLabel';
-import Card from '../../../common/Card';
-import Container from '../../../common/Container';
-import { CreationPlayer } from '../../../../types';
+import Button from '../../../../common/Button';
+import FormInput from '../../../../common/FormInput';
+import PlayerCard from '../../../../common/PlayerCard';
+import FormLabel from '../../../../common/FormLabel';
+import Card from '../../../../common/Card';
+import Container from '../../../../common/Container';
+import { CreationPlayer } from '../../../../../types';
 import ButtonColorCoin from './ButtonColorCoin';
 
 type Props = {

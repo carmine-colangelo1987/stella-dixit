@@ -1,11 +1,11 @@
 /** @format */
-import Container from '../../common/Container';
+import Container from '../../../common/Container';
 import SelectionBoard from './partials/SelectionBoard';
-import Button from '../../common/Button';
+import Button from '../../../common/Button';
 import { useState } from 'react';
 import FakeCardBoard from './partials/FakeCardBoard';
 
-const SelectionResult = () => {
+const RoundAnnounce = () => {
   const [start, setStart] = useState(false);
 
   return (
@@ -25,4 +25,4 @@ const SelectionResult = () => {
   );
 };
 
-export default SelectionResult;
+export default RoundAnnounce;

@@ -1,8 +1,8 @@
 /** @format */
 
 import { memo } from 'react';
-import Star from '../../../Star';
-import IconFeedback from './IconFeedback';
+import Star from '../../../../Star';
+import IconFeedback from '../../IconFeedback';
 
 type Props = {
   color: string;

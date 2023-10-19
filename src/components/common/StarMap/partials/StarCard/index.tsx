@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import classes from './starCard.module.scss';
 import { MatchedCard, RoundPhase } from '../../../../../types';
 import { useAppSelector } from '../../../../../hooks/useStore';
-import StarCardRevealContent from './StarCardRevealContent';
+import StarCardRevealContent from './partials/StarCardRevealContent';
 
 type StarCardSelected = {
   id: string;

@@ -1,17 +1,15 @@
 /** @format */
 
-import { memo } from 'react';
 import classes from './radioSelect.module.scss';
+import { TOption } from '../../../types';
 
-type TOption = { id: string; value: string | number };
-
-type Props = {
+type Props<Value extends string | number> = {
   name: string;
-  options: TOption[];
-  onChange: (o: TOption) => void;
+  options: TOption<Value>[];
+  onChange: (o: TOption<Value>) => void;
 };
 
-const RadioSelect = memo(({ name, options, onChange }: Props) => {
+function RadioSelect<Value extends string | number>({ name, options, onChange }: Props<Value>) {
   return (
     <div className={classes.list}>
       {options.map(o => {
@@ -24,7 +22,6 @@ const RadioSelect = memo(({ name, options, onChange }: Props) => {
       })}
     </div>
   );
-});
+}
 
-RadioSelect.displayName = 'RadioSelect';
 export default RadioSelect;
