@@ -10,7 +10,7 @@ type Props = {
 
 const FormLabel = memo(({ className, htmlFor, children }: PropsWithChildren<Props>) => {
   return (
-    <label className={classNames('block text-sm font-medium', className)} htmlFor={htmlFor}>
+    <label className={classNames('block text-sm font-medium mb-4', className)} htmlFor={htmlFor}>
       {children}
     </label>
   );

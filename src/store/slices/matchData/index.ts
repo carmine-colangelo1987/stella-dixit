@@ -20,10 +20,28 @@ export const matchData = createSlice({
         delete state.matchId;
       }
     },
+    setNewMatchTitle: (state, action: PayloadAction<string>) => {
+      (state.newMatchData ?? {}).matchTitle = action.payload;
+    },
+    setNewMatchExpectedUsers: (state, action: PayloadAction<number>) => {
+      (state.newMatchData ?? {}).expected_users = action.payload;
+    },
+    setNewMatchTotalRounds: (state, action: PayloadAction<number>) => {
+      state.newMatchData = {
+        ...state.newMatchData,
+        total_rounds: action.payload,
+      };
+    },
     resetMatchData: () => initialState,
   },
 });
 
-export const { setMatchData, resetMatchData } = matchData.actions;
+export const {
+  setMatchData,
+  resetMatchData,
+  setNewMatchTitle,
+  setNewMatchExpectedUsers,
+  setNewMatchTotalRounds,
+} = matchData.actions;
 
 export default matchData.reducer;

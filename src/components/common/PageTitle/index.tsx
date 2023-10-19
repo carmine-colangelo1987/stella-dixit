@@ -9,7 +9,7 @@ type Props = {
 
 const PageTitle = memo(({ subtitle, description, children }: PropsWithChildren<Props>) => {
   return (
-    <div className="space-y-4 mt-4 mb-8">
+    <div className="space-y-4 mt-4 mb-8 text-center">
       <h1 className="text-4xl font-extrabold text-primary leading-none tracking-tight md:text-5xl lg:text-6xl">
         {children}
       </h1>

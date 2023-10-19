@@ -10,7 +10,7 @@ import { setMatchRoute } from '../../../router/routes';
 import RadioSelect from '../../common/RadioSelect';
 import { TOption } from '../../../types';
 
-const userOptions: Array<TOption<number>> = Array.from({ length: 17 }, (_, i) => ({
+const userOptions: Array<TOption<number>> = Array.from({ length: 15 }, (_, i) => ({
   id: 'users' + i,
   value: 2 + i,
 }));
@@ -27,7 +27,7 @@ const NewMatch = () => {
   }).format(new Date());
 
   const navigate = useNavigate();
-  const [title, setTitle] = useState(`Partita del ${matchDay}`);
+  const [title, setTitle] = useState('');
   const [players, setPlayers] = useState<number>(2);
   const [rounds, setRounds] = useState<number>(4);
 
@@ -45,37 +45,45 @@ const NewMatch = () => {
   };
 
   return (
-    <Container className="space-y-4">
+    <Container className="space-y-8">
       <PageTitle>Nuova Partita</PageTitle>
-      <section>
-        <FormInput
-          id="title"
-          type="text"
-          label={'Inserisci il titolo della nuova partita'}
-          value={title}
-          onChange={e => setTitle(e.target.value)}
-        />
-      </section>
+      <article className="space-y-6 text-center">
+        <section>
+          <FormInput
+            id="title"
+            type="text"
+            label={'Inserisci il titolo della nuova partita'}
+            value={title}
+            placeholder={`Partita del ${matchDay}`}
+            onChange={e => setTitle(e.target.value)}
+          />
+        </section>
 
-      <section>
-        <div className="mb-2">Numero di cacciatori di stelle</div>
-        <RadioSelect<number>
-          name={'expected_users'}
-          options={userOptions}
-          onChange={o => setPlayers(o.value)}
-        />
-      </section>
+        <section>
+          <div className="max-w-[320px] mx-auto">
+            <RadioSelect<number>
+              label="Numero di cacciatori di stelle"
+              name={'expected_users'}
+              options={userOptions}
+              onChange={o => setPlayers(o.value)}
+            />
+          </div>
+        </section>
 
-      <section>
-        <div className="mb-2">Numero di turni</div>
-        <RadioSelect<number>
-          name={'total_rounds'}
-          options={roundOptions}
-          onChange={o => setRounds(o.value)}
-        />
-      </section>
-
-      <Button onClick={onCreateNewMatch}>Procedi</Button>
+        <section>
+          <div className="max-w-[320px] mx-auto">
+            <RadioSelect<number>
+              label="Numero di turni"
+              name={'total_rounds'}
+              options={roundOptions}
+              onChange={o => setRounds(o.value)}
+            />
+          </div>
+        </section>
+      </article>
+      <Button className="w-full" onClick={onCreateNewMatch}>
+        Procedi
+      </Button>
     </Container>
   );
 };

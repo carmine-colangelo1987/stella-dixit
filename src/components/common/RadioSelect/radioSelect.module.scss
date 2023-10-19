@@ -1,17 +1,16 @@
 .list {
-  @apply flex gap-2 flex-wrap justify-center;
-  &:has(input:checked) {
-    > .option {
-      opacity: 0.75;
-    }
-  }
+  @apply grid gap-2;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  justify-items: center;
 }
 .option {
   @apply relative w-12 h-12 rounded-full bg-secondary flex items-center justify-center text-white transition-base;
-
+  cursor: pointer;
+  &:hover {
+    @apply bg-secondary-darken;
+  }
 
   &:has(:checked) {
-    @apply bg-primary shadow-md;
-    opacity: 1 !important;
+    @apply bg-primary shadow-md scale-[1.2];
   }
 }
