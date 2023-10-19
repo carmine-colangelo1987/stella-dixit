@@ -9,6 +9,10 @@ module.exports = {
   content: ['./src/**/*.{js,jsx,ts,tsx}', './public/index.html'],
   theme: {
     extend: {
+      fontFamily: {
+        heading: 'Luckiest Guy, cursive',
+        base: 'Grandstander, cursive',
+      },
       colors: {
         'main-text': {
           DEFAULT: colors['slate']['700'],

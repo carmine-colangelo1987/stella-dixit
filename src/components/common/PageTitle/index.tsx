@@ -10,7 +10,7 @@ type Props = {
 const PageTitle = memo(({ subtitle, description, children }: PropsWithChildren<Props>) => {
   return (
     <div className="space-y-4 mt-4 mb-8 text-center">
-      <h1 className="text-4xl font-extrabold text-primary leading-none tracking-tight md:text-5xl lg:text-6xl">
+      <h1 className="text-4xl font-extrabold font-heading text-primary tracking-wide leading-none md:text-5xl lg:text-6xl">
         {children}
       </h1>
       {subtitle && (
@@ -18,7 +18,7 @@ const PageTitle = memo(({ subtitle, description, children }: PropsWithChildren<P
           {subtitle}
         </h2>
       )}
-      {description && <p>{description}</p>}
+      {description && <p className="font-thin">{description}</p>}
     </div>
   );
 });

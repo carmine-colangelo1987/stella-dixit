@@ -48,7 +48,7 @@ const InsertNewPlayer = memo(({ availableColors, addPlayer }: Props) => {
               <hr className={'my-4'} />
               <section>
                 <FormLabel className={'mb-2'}>Scegli il colore</FormLabel>
-                <div className="flex gap-2 flex-wrap">
+                <div className="flex flex-wrap">
                   {availableColors.map(c => (
                     <ButtonColorCoin
                       key={c.color}

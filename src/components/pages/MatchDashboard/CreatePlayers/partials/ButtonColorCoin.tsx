@@ -17,7 +17,7 @@ const ButtonColorCoin = memo(({ color, disabled, active, onClick }: Props) => {
       type="button"
       title={color}
       onClick={onClick}
-      className={classNames('w-12 aspect-sqare rounded-full transition-base', {
+      className={classNames('w-1/5 p-2 aspect-sqare rounded-full transition-base', {
         'opacity-40': disabled,
         'translate-y[-10px] scale-[1.15]': active,
       })}
