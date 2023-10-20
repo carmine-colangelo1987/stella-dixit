@@ -50,6 +50,9 @@ export const matchData = createSlice({
         };
       }
     },
+    resetNewMatchData: state => {
+      delete state.newMatchData;
+    },
     resetMatchData: () => initialState,
   },
 });
@@ -57,6 +60,7 @@ export const matchData = createSlice({
 export const {
   setMatchData,
   resetMatchData,
+  resetNewMatchData,
   setNewMatchTitle,
   setNewMatchExpectedUsers,
   setNewMatchTotalRounds,

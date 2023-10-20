@@ -39,6 +39,7 @@ export const roundData = createSlice({
       state.fallenCard = state.currentRevealedCard;
       state.currentRevealedCard = undefined;
     },
+    resetRoundData: state => initialState,
   },
 });
 
@@ -49,6 +50,7 @@ export const {
   setDark,
   removeCurrentRevealedCard,
   setFallen,
+  resetRoundData,
 } = roundData.actions;
 
 export default roundData.reducer;

@@ -1,5 +1,5 @@
 /** @format */
-import { MatchData, Player, RoundAssociationData } from '../../types';
+import { CreationPlayer, MatchData, Player, RoundAssociationData } from '../../types';
 
 export type BaseResponse<T = string> = {
   status: 'success' | 'error' | 'received';
@@ -24,6 +24,9 @@ export type GetCurrentMatchResponse = BaseResponse<Omit<MatchData, 'currentRound
 export type GetMatchDataResponse = BaseResponse<MatchData>;
 
 export type GetPlayersListResponse = BaseResponse<Player[]>;
+
+export type CreatePlayersVariables = { players: CreationPlayer[] };
+export type CreatePlayersResponse = BaseResponse<Player[]>;
 
 export type PairUserToClientVariables = { clientId: string; userId: string };
 export type PairUserToClientResponse = BaseResponse<boolean>;

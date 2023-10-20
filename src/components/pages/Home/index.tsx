@@ -6,6 +6,8 @@ import Container from '../../common/Container';
 import Icon from '../../common/Icon';
 import { useGetCurrentMatchQuery } from '../../../store/api/match';
 import Loader from '../../common/Loader';
+import { useAppDispatch } from '../../../hooks/useStore';
+import { resetNewMatchData } from '../../../store/slices/matchData';
 
 type Props = {};
 
@@ -14,6 +16,7 @@ const Home = (props: Props) => {
   const matchId = data?.data?.currentMatch;
   const matchTitle = data?.data?.matchTitle;
   const matchRoute = setMatchRoute(matchId ?? '');
+  const dispatch = useAppDispatch();
 
   return (
     <Container>
@@ -27,7 +30,7 @@ const Home = (props: Props) => {
           </Link>
         )}
 
-        <Link to={AppRoutes.NEW_MATCH}>
+        <Link to={AppRoutes.NEW_MATCH} onClick={() => dispatch(resetNewMatchData())}>
           <Button variant="secondary" className="w-full">
             <Icon icon={'coffee'} className={'mr-2'} /> inizia una nuova partita
           </Button>

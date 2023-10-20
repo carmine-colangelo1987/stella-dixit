@@ -5,6 +5,7 @@ export enum AppRoutes {
   NEW_MATCH = '/nuova-partita',
   CURRENT_MATCH = '/partita/:matchId',
   CREATE_PLAYERS = 'crea-cercatori',
+  CREATE_NEW_PLAYER = 'creazione',
   SELECT_PLAYER = 'seleziona-cercatore',
   CURRENT_ROUND = 'round',
   ROUND_ASSOCIATION = 'associare',
@@ -14,7 +15,9 @@ export enum AppRoutes {
 }
 
 export const setMatchRoute = (id: string) => AppRoutes.CURRENT_MATCH.replace(':matchId', id);
+
+export const setMatchConfigRoute = (matchId: string, ...subPages: string[]) =>
+  `${setMatchRoute(matchId)}/${subPages.join('/')}`;
+
 export const setRoundRoute = (matchId: string, phase?: string) =>
-  `${AppRoutes.CURRENT_MATCH.replace(':matchId', matchId)}/${AppRoutes.CURRENT_ROUND}${
-    phase ? '/' + phase : ''
-  }`;
+  `${setMatchConfigRoute(matchId, AppRoutes.CURRENT_ROUND, phase || '')}`;

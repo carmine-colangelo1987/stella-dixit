@@ -5,6 +5,8 @@ import { genUrl } from '../../../constants/api';
 import {
   CreateMatchResponse,
   CreateMatchVariables,
+  CreatePlayersResponse,
+  CreatePlayersVariables,
   GetCurrentMatchResponse,
   GetMatchDataResponse,
   GetMatchDataVariables,
@@ -25,7 +27,7 @@ export const apiMatch = createApi({
     },
   }),
   endpoints: builder => ({
-    createNewMatch: builder.query<CreateMatchResponse, CreateMatchVariables>({
+    createNewMatch: builder.mutation<CreateMatchResponse, CreateMatchVariables>({
       query: variables => ({
         url: genUrl('newMatch'),
         method: 'POST',
@@ -45,13 +47,20 @@ export const apiMatch = createApi({
         body: JSON.stringify(variables),
       }),
     }),
+    createPlayers: builder.mutation<CreatePlayersResponse, CreatePlayersVariables>({
+      query: variables => ({
+        url: genUrl('createPlayers'),
+        method: 'POST',
+        body: JSON.stringify(variables),
+      }),
+    }),
     getPlayersList: builder.query<GetPlayersListResponse, void>({
       query: () => ({
         url: genUrl('getPlayersList'),
         method: 'GET',
       }),
     }),
-    pairUser: builder.query<PairUserToClientResponse, PairUserToClientVariables>({
+    pairUser: builder.mutation<PairUserToClientResponse, PairUserToClientVariables>({
       query: variables => ({
         url: genUrl('pairUser'),
         method: 'POST',
@@ -73,10 +82,11 @@ export const apiMatch = createApi({
 });
 
 export const {
-  useLazyCreateNewMatchQuery,
+  useCreateNewMatchMutation,
   useGetCurrentMatchQuery,
   useLazyGetMatchDataQuery,
-  useLazyPairUserQuery,
+  useCreatePlayersMutation,
+  usePairUserMutation,
   useLazyGetPlayersListQuery,
   useGetPlayersListQuery,
   useGetRoundAssociacionsQuery,

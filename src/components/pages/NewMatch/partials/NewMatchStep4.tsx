@@ -1,19 +1,23 @@
 /** @format */
 
 import { useForm } from 'react-hook-form';
-import { useAppSelector } from '../../../../hooks/useStore';
+import { useAppDispatch, useAppSelector } from '../../../../hooks/useStore';
 import FormModule from '../../../common/FormModule';
 import { CreationMatchData, StepProps } from '../../../../types';
 import { setMatchRoute } from '../../../../router/routes';
 import { useNavigate } from 'react-router-dom';
-import { useLazyCreateNewMatchQuery } from '../../../../store/api/match';
+import { useCreateNewMatchMutation } from '../../../../store/api/match';
+import { useEffect } from 'react';
+import { resetRoundData } from '../../../../store/slices/roundData';
+import { resetPlayerData } from '../../../../store/slices/playerData';
 
 type FormValues = CreationMatchData;
 
 const NewMatchStep4 = ({ onPrev }: StepProps) => {
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const newMatchData = useAppSelector(s => s.matchDataReducer.newMatchData);
-  const [createNewMatchHandle] = useLazyCreateNewMatchQuery();
+  const [createNewMatchHandle, { data }] = useCreateNewMatchMutation();
 
   const { handleSubmit, watch } = useForm<FormValues>({
     mode: 'onChange',
@@ -25,13 +29,17 @@ const NewMatchStep4 = ({ onPrev }: StepProps) => {
       title: values.matchTitle,
       expected_users: values.expected_users,
       total_rounds: values.total_rounds,
-    }).then(r => {
-      const matchId = r.data?.data;
-      if (matchId) {
-        navigate(setMatchRoute(matchId));
-      }
     });
   };
+
+  useEffect(() => {
+    const matchId = data?.data;
+    if (matchId) {
+      dispatch(resetPlayerData());
+      dispatch(resetRoundData());
+      navigate(setMatchRoute(matchId));
+    }
+  }, [data?.data]);
 
   const matchTitle = watch('matchTitle');
   const expectedUsers = watch('expected_users');

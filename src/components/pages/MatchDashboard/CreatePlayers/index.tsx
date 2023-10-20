@@ -1,47 +1,44 @@
 /** @format */
 
-import { useMemo } from 'react';
-import { CreationPlayer } from '../../../../types';
-import PageTitle from '../../../common/PageTitle';
-import { coinColorsList } from '../../../../utils/tailwindColors';
-import InsertNewPlayer from './partials/InsertNewPlayer';
-import Container from '../../../common/Container';
-import PlayersList from './partials/PlayersList';
-import Button from '../../../common/Button';
 import { useNavigate } from 'react-router-dom';
-import { AppRoutes } from '../../../../router/routes';
 import { useAppDispatch, useAppSelector } from '../../../../hooks/useStore';
-import { addNewUser, deleteNewUser } from '../../../../store/slices/playerData';
+import { useMatchId } from '../../../../hooks/useMatchId';
+import { deleteNewUser, resetCreatedUsersList, setPlayersList } from '../../../../store/slices/playerData';
+import { AppRoutes, setMatchRoute } from '../../../../router/routes';
+import Container from '../../../common/Container';
+import PageTitle from '../../../common/PageTitle';
+import PlayersList from '../../../common/PlayersList';
+import Button from '../../../common/Button';
+import { useCreatePlayersMutation } from '../../../../store/api/match';
+import { useEffect } from 'react';
 
 const CreatePlayers = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+  const matchId = useMatchId();
   const players = useAppSelector(s => s.playerDataReducer.createdPlayersList);
-  const expectedPlayers = useAppSelector(s => s.matchDataReducer.matchData?.expected_users);
-
-  const availableColors = useMemo(() => {
-    return coinColorsList.map(baseColor => {
-      return {
-        color: baseColor,
-        disabled: !!players.find(({ color }) => color === baseColor),
-      };
-    });
-  }, [players]);
-
-  const addPlayer = (p: CreationPlayer) => {
-    dispatch(addNewUser(p));
-  };
+  const expectedPlayers = useAppSelector(s => s.matchDataReducer.matchData?.expected_users ?? 0);
+  const [createPlayers, { data, isLoading }] = useCreatePlayersMutation();
 
   const removePlayer = (i: number) => {
     dispatch(deleteNewUser(i));
   };
 
-  const onProceed = () => {
-    // todo fare la mutation per inserire i players
-    navigate(AppRoutes.CURRENT_MATCH);
+  const onCreateNewPlayer = () => {
+    navigate(AppRoutes.CREATE_NEW_PLAYER);
   };
 
-  const ready = players.length === expectedPlayers;
+  const onProceed = () => {
+    createPlayers({ players });
+  };
+
+  useEffect(() => {
+    if (data?.data && data.data.length > 0) {
+      dispatch(setPlayersList(data.data));
+      dispatch(resetCreatedUsersList());
+      navigate(setMatchRoute(matchId), { replace: true });
+    }
+  }, [data?.data]);
 
   return (
     <>
@@ -52,23 +49,22 @@ const CreatePlayers = () => {
         >
           Cercatori di Stelle
         </PageTitle>
-      </Container>
-
-      <Container className="py-4">
-        <p className="text-center text-main-text-lighten">
-          Giocatori creati {players.length}/{expectedPlayers}
-        </p>
-        {players.length > 0 && <PlayersList players={players} onRemovePlayer={removePlayer} />}
-      </Container>
-
-      {!ready && <InsertNewPlayer availableColors={availableColors} addPlayer={addPlayer} />}
-
-      <Container className="py-4">
-        {players.length > 1 && (
-          <Button variant="secondary" onClick={onProceed} className="w-full mb-4">
-            Inizia la caccia con {players.length} cercatori!
-          </Button>
-        )}
+        <div className={'space-y-6'}>
+          <p className="text-center text-main-text-lighten">
+            Giocatori creati {players.length}/{expectedPlayers}
+          </p>
+          <PlayersList players={players} onRemovePlayer={removePlayer} />
+          {players.length < expectedPlayers && (
+            <Button variant="secondary" className="w-full" onClick={onCreateNewPlayer}>
+              Aggiungi giocatore
+            </Button>
+          )}
+          {players.length > 1 && (
+            <Button variant="secondary" onClick={onProceed} className="w-full mb-4" loading={isLoading}>
+              Inizia la caccia con {players.length} cercatori!
+            </Button>
+          )}
+        </div>
       </Container>
     </>
   );

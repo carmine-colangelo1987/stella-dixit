@@ -1,24 +1,26 @@
 /** @format */
 
-import PlayersList from '../CreatePlayers/partials/PlayersList';
+import PlayersList from '../../../common/PlayersList';
 import Container from '../../../common/Container';
 import PageTitle from '../../../common/PageTitle';
 import { useAppDispatch, useAppSelector } from '../../../../hooks/useStore';
 import { setPlayer } from '../../../../store/slices/playerData';
-import { useLazyGetPlayersListQuery, useLazyPairUserQuery } from '../../../../store/api/match';
+import { useLazyGetPlayersListQuery, usePairUserMutation } from '../../../../store/api/match';
 import { useEffect } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { setRoundRoute } from '../../../../router/routes';
+import { useMatchId } from '../../../../hooks/useMatchId';
+import Loader from '../../../common/Loader';
 
 const SelectPlayer = () => {
   const navigate = useNavigate();
-  const location = useLocation();
+  const matchId = useMatchId();
   const dispatch = useAppDispatch();
   const clientId = useAppSelector(s => s.clientId);
-  const matchId = useAppSelector(s => s.matchDataReducer.matchId ?? '');
-  const [getPlayersListData, { data }] = useLazyGetPlayersListQuery();
-  const [pairUser] = useLazyPairUserQuery();
+  const [getPlayersListData, { data, isLoading: isUpdatingPlayersList }] = useLazyGetPlayersListQuery();
+  const [pairUser, { isLoading: isPairing }] = usePairUserMutation();
   const players = data?.data || [];
+  const loading = isUpdatingPlayersList || isPairing;
 
   useEffect(() => {
     getPlayersListData();
@@ -30,10 +32,9 @@ const SelectPlayer = () => {
       const confirmed = window.confirm(`Confermi di voler iniziare la partita con l'utente ${player.name}?`);
       if (confirmed) {
         pairUser({ clientId, userId: player.id }).then(() => {
-          console.log(location, setRoundRoute(matchId));
-          navigate(setRoundRoute(matchId));
+          dispatch(setPlayer(player));
           getPlayersListData();
-          dispatch(setPlayer(players[i]));
+          navigate(setRoundRoute(matchId), { replace: true });
         });
       } else {
         console.log('Utente non confermato', player, clientId);
@@ -49,6 +50,7 @@ const SelectPlayer = () => {
       >
         Cercatori di Stelle
       </PageTitle>
+      {loading && <Loader />}
       <PlayersList players={players} onPlayerSelected={onPlayerSelected} />
     </Container>
   );
