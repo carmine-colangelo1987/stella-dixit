@@ -1,5 +1,12 @@
 /** @format */
-import { CreationPlayer, MatchData, Player, RoundAssociationData } from '../../types';
+import {
+  CreationPlayer,
+  MatchData,
+  MatchedCard,
+  Player,
+  RoundAssociationData,
+  RoundRevealData,
+} from '../../types';
 
 export type BaseResponse<T = string> = {
   status: 'success' | 'error' | 'received';
@@ -33,3 +40,28 @@ export type PairUserToClientResponse = BaseResponse<boolean>;
 
 export type GetRoundAssociationsVariables = { matchId: string };
 export type GetRoundAssociationsResponse = BaseResponse<Array<RoundAssociationData>>;
+
+export type SetSelectedCardsVariables = {
+  matchId: string;
+  userId: string;
+  selected: string[];
+};
+export type SetSelectedCardsResponse = BaseResponse<{
+  id: string;
+  selected_cards: string[];
+  total_selected_cards: number;
+  dark: boolean;
+}>;
+
+export type SetMatchCardVariables = {
+  matchId: string;
+  userId: string;
+  match: MatchedCard;
+};
+export type SetMatchCardResponse = BaseResponse<RoundRevealData>;
+
+export type SetFallenVariables = {
+  matchId: string;
+  userId: string;
+};
+export type SetFallenResponse = BaseResponse<RoundRevealData>;

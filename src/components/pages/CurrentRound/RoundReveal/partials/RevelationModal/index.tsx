@@ -6,18 +6,55 @@ import {
   setFallen,
   setMatchedCard,
 } from '../../../../../../store/slices/roundData';
-import { useAppDispatch } from '../../../../../../hooks/useStore';
+import { useAppDispatch, useAppSelector } from '../../../../../../hooks/useStore';
 import Button from '../../../../../common/Button';
 import classNames from 'classnames';
 import classes from './revelationModal.module.scss';
+import { useSetFallenMutation, useSetMatchCardMutation } from '../../../../../../store/api/match';
+import { useMatchId } from '../../../../../../hooks/useMatchId';
+import { toast } from 'react-toastify';
 
 type Props = {
   revealedCard: string;
 };
+const frasiOk = [
+  'Ok!',
+  'Bene!',
+  'Molto bene!',
+  'Wow!',
+  'Continua così!',
+  'Ottimo!',
+  'Incredibile!!',
+  'Ehi ma come fai??!',
+  'Sei un veggente!!',
+  'Perfetto!',
+];
 
 const RevelationModal = memo(({ revealedCard }: Props) => {
   const dispatch = useAppDispatch();
+  const matchId = useMatchId();
+  const userId = useAppSelector(s => s.playerDataReducer.userId);
+  const allSelected = useAppSelector(s => s.roundDataReducer.selectedCards.length);
+  const allMatched = useAppSelector(s => s.roundDataReducer.matchedCards.length);
+  const completed = allSelected === allMatched;
   const [visible, setVisible] = useState(false);
+  const [setMatchMutation, { isSuccess: isSparkSuccess }] = useSetMatchCardMutation();
+  const [setFallenMutation, { isSuccess: isFallen }] = useSetFallenMutation();
+
+  useEffect(() => {
+    if (isSparkSuccess) {
+      const exclamationIndex = completed ? 9 : allMatched - 1;
+      toast.success(frasiOk[exclamationIndex]);
+      animateClosure();
+    }
+  }, [isSparkSuccess, completed, allMatched]);
+
+  useEffect(() => {
+    if (isFallen) {
+      toast.warn('Accidenti! Il tuo cercatore è caduto!');
+      animateClosure();
+    }
+  }, [isFallen]);
 
   const animateClosure = () =>
     new Promise(resolve => {
@@ -32,16 +69,16 @@ const RevelationModal = memo(({ revealedCard }: Props) => {
     const confirmed = window.confirm(
       `Confermi di aver trovato una ${isSuperSpark ? 'Super' : ''} Scintilla?`,
     );
-    if (confirmed) {
-      await animateClosure();
+    if (confirmed && userId) {
+      await setMatchMutation({ matchId, userId, match: { id: revealedCard, isSuperSpark } });
       dispatch(setMatchedCard({ id: revealedCard, isSuperSpark }));
     }
   };
 
   const onFall = async () => {
     const confirmed = window.confirm('Confermi di essere caduto?');
-    if (confirmed) {
-      await animateClosure();
+    if (confirmed && userId) {
+      await setFallenMutation({ matchId, userId });
       dispatch(setFallen(true));
     }
   };

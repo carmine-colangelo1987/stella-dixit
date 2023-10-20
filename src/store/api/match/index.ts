@@ -15,6 +15,12 @@ import {
   GetRoundAssociationsVariables,
   PairUserToClientResponse,
   PairUserToClientVariables,
+  SetFallenResponse,
+  SetFallenVariables,
+  SetMatchCardResponse,
+  SetMatchCardVariables,
+  SetSelectedCardsResponse,
+  SetSelectedCardsVariables,
 } from '../types';
 
 export const apiMatch = createApi({
@@ -65,15 +71,32 @@ export const apiMatch = createApi({
         url: genUrl('pairUser'),
         method: 'POST',
         body: JSON.stringify(variables),
-        redirect: 'follow',
-        headers: {
-          'Content-Type': 'text/plain;charset=utf-8',
-        },
       }),
     }),
     getRoundAssociacions: builder.query<GetRoundAssociationsResponse, GetRoundAssociationsVariables>({
       query: variables => ({
         url: genUrl('getRoundAssociacions'),
+        method: 'POST',
+        body: JSON.stringify(variables),
+      }),
+    }),
+    setSelectedCards: builder.mutation<SetSelectedCardsResponse, SetSelectedCardsVariables>({
+      query: variables => ({
+        url: genUrl('setSelectedCards'),
+        method: 'POST',
+        body: JSON.stringify(variables),
+      }),
+    }),
+    setMatchCard: builder.mutation<SetMatchCardResponse, SetMatchCardVariables>({
+      query: variables => ({
+        url: genUrl('setMatchCard'),
+        method: 'POST',
+        body: JSON.stringify(variables),
+      }),
+    }),
+    setFallen: builder.mutation<SetFallenResponse, SetFallenVariables>({
+      query: variables => ({
+        url: genUrl('setFallen'),
         method: 'POST',
         body: JSON.stringify(variables),
       }),
@@ -90,4 +113,7 @@ export const {
   useLazyGetPlayersListQuery,
   useGetPlayersListQuery,
   useGetRoundAssociacionsQuery,
+  useSetSelectedCardsMutation,
+  useSetMatchCardMutation,
+  useSetFallenMutation,
 } = apiMatch;

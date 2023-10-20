@@ -45,6 +45,11 @@ export type RoundData = {
   points: number;
 };
 
+export type MatchedCard = {
+  id: string;
+  isSuperSpark: boolean;
+};
+
 // risposta durante la fase di Association
 export type RoundAssociationData = {
   userId: RoundData['id'];
@@ -60,17 +65,13 @@ export type RoundRevealData = {
   super_match: RoundData['super_match'];
   total_super_matches: RoundData['total_super_matches'];
   fallen: RoundData['fallen'];
+  matchedCards: MatchedCard[];
 };
 
 // risposta durante la fase di Reveal
 export type RoundResultData = {
   userId: RoundData['id'];
   points: RoundData['points'];
-};
-
-export type MatchedCard = {
-  id: string;
-  isSuperSpark: boolean;
 };
 
 // utils
