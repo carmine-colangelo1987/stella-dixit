@@ -11,13 +11,13 @@ type Props = {
   className?: string;
 };
 
-const Star = memo(({ color = 'neutral', fill, isSuperSpark, className }: Props) => {
+const Star = memo(({ color, fill, isSuperSpark, className }: Props) => {
   return (
     <svg
       version="1.1"
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 135 135"
-      className={classNames(classes.figure, { fill }, `text-${color}-500`, className)}
+      className={classNames(classes.figure, { fill }, { [`text-${color}-500`]: !!color }, className)}
     >
       <path
         className="star"

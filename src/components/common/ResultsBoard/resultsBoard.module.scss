@@ -1,0 +1,65 @@
+/** @format */
+.board {
+  display: grid;
+  grid-template-columns: auto calc(170px - 1rem) repeat(var(--players, 2), 170px);
+  grid-template-rows: auto repeat(var(--rounds, 4), auto) auto;
+  width: fit-content;
+  @apply pt-8 px-4 pb-16 mx-auto;
+
+  header:not(:global(.invisible)) + header,
+  section + section,
+  footer:not(:global(.invisible)) + footer {
+    @apply pl-4;
+  }
+  header,
+  aside,
+  section,
+  footer {
+    @apply bg-yellow-700/50;
+  }
+  aside,
+  section {
+    @apply flex border-orange-200;
+  }
+  aside {
+    @apply sticky left-0 z-10 bg-white;
+  }
+}
+.playerBox {
+  @apply rounded-t-xl rounded-b-md py-2 px-4 min-w-[150px] -mt-4;
+  border-width: 0 0 6px 0;
+  border-color: currentColor;
+}
+
+.roundBox {
+  @apply flex items-center justify-center w-full text-stone-700 text-3xl font-bold h-full leading-none p-4 bg-yellow-700/50;
+}
+
+.playerRoundPoints {
+  @apply flex items-center justify-center w-4/5 bg-orange-100 mx-auto text-center shadow-lg text-2xl;
+  height: calc(100% + 1px);
+  border-bottom: 1px solid currentColor;
+}
+
+.playerMatchPoints {
+  @apply rounded-t-lg rounded-b-xl rounded-b-md w-full h-24 -mb-4 relative flex items-center justify-center;
+  > span {
+    @apply relative z-10 text-4xl ;
+  }
+  :global(.fa-star) {
+    @apply -mt-3 absolute bottom-0 left-[10%] z-[2];
+    width: 80%;
+    height: auto;
+    stroke: currentColor;
+    stroke-width: 20;
+    > path {
+      fill: white;
+    }
+  }
+  &:after {
+    content: '';
+    background: currentColor;
+    @apply w-full aspect-square absolute bottom-0 left-0 rounded-full z-[1];
+    transform: translateY(48%) rotateX(75deg);
+  }
+}
