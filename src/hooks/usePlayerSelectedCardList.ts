@@ -7,7 +7,7 @@ import { usePlayersList } from './usePlayersList';
 
 export const usePlayerSelectedCardList = (matchId: string) => {
   const userId = useAppSelector(s => s.playerDataReducer.userId);
-  const players = usePlayersList();
+  const { playersList: players } = usePlayersList();
   const { data } = useGetRoundAssociacionsQuery({ matchId });
 
   const [userSteps, setUserSteps] = useState<number>();

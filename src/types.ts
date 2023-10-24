@@ -14,6 +14,14 @@ export type Player = {
 
 export type CreationPlayer = Pick<Player, 'name' | 'color' | 'paired'>;
 
+export type RoundResult = { round: number; points: number };
+
+export type RoundResults = {
+  rounds: Array<RoundResult>;
+};
+
+export type PlayerResults = Player & RoundResults;
+
 export type MatchData = {
   matchTitle: string;
   currentMatch: string;

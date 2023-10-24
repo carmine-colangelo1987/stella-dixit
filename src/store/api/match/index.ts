@@ -13,6 +13,7 @@ import {
   GetPlayersListResponse,
   GetRoundAssociationsResponse,
   GetRoundAssociationsVariables,
+  GetRoundResultsResponse,
   PairUserToClientResponse,
   PairUserToClientVariables,
   SetFallenResponse,
@@ -66,6 +67,12 @@ export const apiMatch = createApi({
         method: 'GET',
       }),
     }),
+    getRoundResults: builder.query<GetRoundResultsResponse, void>({
+      query: () => ({
+        url: genUrl('getRoundResults'),
+        method: 'GET',
+      }),
+    }),
     pairUser: builder.mutation<PairUserToClientResponse, PairUserToClientVariables>({
       query: variables => ({
         url: genUrl('pairUser'),
@@ -112,6 +119,8 @@ export const {
   usePairUserMutation,
   useLazyGetPlayersListQuery,
   useGetPlayersListQuery,
+  useLazyGetRoundResultsQuery,
+  useGetRoundResultsQuery,
   useGetRoundAssociacionsQuery,
   useSetSelectedCardsMutation,
   useSetMatchCardMutation,

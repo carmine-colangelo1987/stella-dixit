@@ -2,7 +2,7 @@
 
 // eslint-disable-next-line import/named
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { initialState } from './initialState';
+import { initialState, TPlayerData } from './initialState';
 import { CreationPlayer, Player } from '../../../types';
 
 /**
@@ -32,6 +32,9 @@ export const playerData = createSlice({
     setPlayersList: (state, action: PayloadAction<Player[]>) => {
       state.playersList = action.payload;
     },
+    setPlayersResults: (state, action: PayloadAction<TPlayerData['playersResults']>) => {
+      state.playersResults = action.payload;
+    },
     resetPlayerData: () => initialState,
   },
 });
@@ -41,6 +44,7 @@ export const {
   addNewUser,
   deleteNewUser,
   setPlayersList,
+  setPlayersResults,
   resetCreatedUsersList,
   resetPlayerData,
 } = playerData.actions;

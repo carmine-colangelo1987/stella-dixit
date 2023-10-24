@@ -17,7 +17,7 @@ const Dashboard = memo((props: Props) => {
   const matchId = useMatchId();
   const matchData = useAppSelector(s => s.matchDataReducer.matchData);
   const playerData = useAppSelector(s => s.playerDataReducer.player);
-  const playersList = usePlayersList();
+  const { playersList } = usePlayersList();
   const roundRoute = setRoundRoute(matchId);
   const matchTitle = matchData?.matchTitle || 'Partita';
   const currentRound = matchData?.currentRoundName;

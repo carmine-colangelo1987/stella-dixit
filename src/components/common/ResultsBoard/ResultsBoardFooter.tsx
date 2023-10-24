@@ -4,10 +4,13 @@ import { memo } from 'react';
 import classNames from 'classnames';
 import classes from './resultsBoard.module.scss';
 import Icon from '../Icon';
-import { useAppSelector } from '../../../hooks/useStore';
+import { PlayerResults } from '../../../types';
 
-const ResultsBoardFooter = memo(() => {
-  const playersList = useAppSelector(s => s.playerDataReducer.playersList);
+type Props = {
+  playersList: Array<PlayerResults>;
+};
+
+const ResultsBoardFooter = memo(({ playersList }: Props) => {
   return (
     <>
       <footer className="invisible" />

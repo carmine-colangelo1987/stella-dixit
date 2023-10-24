@@ -1,6 +1,6 @@
 /** @format */
 
-import { CreationPlayer, Player } from '../../../types';
+import { CreationPlayer, Player, PlayerResults } from '../../../types';
 
 /** @format */
 
@@ -9,9 +9,11 @@ export type TPlayerData = {
   player?: Player;
   createdPlayersList: CreationPlayer[];
   playersList: Player[];
+  playersResults: Pick<PlayerResults, 'id' | 'points' | 'rounds'>[];
 };
 
 export const initialState: TPlayerData = {
   createdPlayersList: [],
   playersList: [],
+  playersResults: [],
 };

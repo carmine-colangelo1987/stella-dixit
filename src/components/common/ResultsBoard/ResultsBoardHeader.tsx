@@ -3,10 +3,13 @@
 import { memo } from 'react';
 import classNames from 'classnames';
 import classes from './resultsBoard.module.scss';
-import { useAppSelector } from '../../../hooks/useStore';
+import { PlayerResults } from '../../../types';
 
-const ResultsBoardHeader = memo(() => {
-  const playersList = useAppSelector(s => s.playerDataReducer.playersList);
+type Props = {
+  playersList: Array<PlayerResults>;
+};
+
+const ResultsBoardHeader = memo(({ playersList }: Props) => {
   return (
     <>
       <header className="invisible" />

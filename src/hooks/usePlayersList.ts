@@ -1,19 +1,28 @@
 /** @format */
 
-import { useAppDispatch, useAppSelector } from './useStore';
-import { useEffect } from 'react';
-import { useGetPlayersListQuery } from '../store/api/match';
-import { setPlayersList } from '../store/slices/playerData';
+import { useEffect, useState } from 'react';
+import { useGetPlayersListQuery, useLazyGetPlayersListQuery } from '../store/api/match';
+import { Player } from '../types';
 
 export const usePlayersList = () => {
-  const dispatch = useAppDispatch();
-  const { data } = useGetPlayersListQuery();
+  const [playersList, setPlayersList] = useState<Player[]>([]);
+  const getPlayersListData = useGetPlayersListQuery();
+  const [getPlayersList, { data }] = useLazyGetPlayersListQuery();
 
   useEffect(() => {
     if (data?.data && data.data.length > 0) {
-      dispatch(setPlayersList(data.data));
+      setPlayersList(data.data);
     }
   }, [data?.data]);
 
-  return useAppSelector(s => s.playerDataReducer.playersList);
+  useEffect(() => {
+    if (getPlayersListData.data?.data && getPlayersListData.data.data.length > 0) {
+      setPlayersList(getPlayersListData.data.data);
+    }
+  }, [getPlayersListData.data?.data]);
+
+  return {
+    playersList,
+    getPlayersList,
+  };
 };

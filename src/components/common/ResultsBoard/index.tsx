@@ -1,15 +1,18 @@
 /** @format */
 
-import { useAppSelector } from '../../../hooks/useStore';
 import classes from './resultsBoard.module.scss';
 import { CSSProperties } from 'react';
 import ResultsBoardHeader from './ResultsBoardHeader';
 import ResultsBoardFooter from './ResultsBoardFooter';
 import ResultBoardBody from './ResultBoardBody';
+import { PlayerResults } from '../../../types';
 
-const ResultsBoard = () => {
-  const rounds = useAppSelector(s => s.matchDataReducer.matchData?.total_rounds ?? 0);
-  const playersListLength = useAppSelector(s => s.playerDataReducer.playersList.length);
+type ResultsBoardProps = {
+  rounds: number;
+  playersList: Array<PlayerResults>;
+};
+const ResultsBoard = ({ rounds, playersList }: ResultsBoardProps) => {
+  const playersListLength = playersList.length;
 
   const style = {
     '--rounds': rounds,
@@ -19,9 +22,9 @@ const ResultsBoard = () => {
   return (
     <div className="overflow-x-auto">
       <div className={classes.board} style={style}>
-        <ResultsBoardHeader />
-        <ResultBoardBody rounds={rounds} />
-        <ResultsBoardFooter />
+        <ResultsBoardHeader playersList={playersList} />
+        <ResultBoardBody playersList={playersList} rounds={rounds} />
+        <ResultsBoardFooter playersList={playersList} />
       </div>
     </div>
   );

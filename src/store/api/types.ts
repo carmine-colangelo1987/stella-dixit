@@ -4,7 +4,9 @@ import {
   MatchData,
   MatchedCard,
   Player,
+  PlayerResults,
   RoundAssociationData,
+  RoundResults,
   RoundRevealData,
 } from '../../types';
 
@@ -31,6 +33,8 @@ export type GetCurrentMatchResponse = BaseResponse<Omit<MatchData, 'currentRound
 export type GetMatchDataResponse = BaseResponse<MatchData>;
 
 export type GetPlayersListResponse = BaseResponse<Player[]>;
+
+export type GetRoundResultsResponse = BaseResponse<Pick<PlayerResults, 'id' | 'rounds' | 'points'>[]>;
 
 export type CreatePlayersVariables = { players: CreationPlayer[] };
 export type CreatePlayersResponse = BaseResponse<Player[]>;
