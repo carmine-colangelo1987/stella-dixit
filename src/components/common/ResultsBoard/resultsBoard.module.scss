@@ -2,7 +2,7 @@
 .board {
   display: grid;
   grid-template-columns: auto calc(170px - 1rem) repeat(var(--players, 2), 170px);
-  grid-template-rows: auto repeat(var(--rounds, 4), auto) auto;
+  grid-auto-rows: auto;
   width: fit-content;
   @apply pt-8 px-4 pb-16 mx-auto;
 
